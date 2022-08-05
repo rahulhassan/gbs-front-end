@@ -1,7 +1,6 @@
 import axios from 'axios';
 const instance = axios.create({
     baseURL:'http://localhost:8000/api'
-    //baseURL: 'https://api.adweb.aiub.edu'
 });
 
 instance.interceptors.request.use((config)=>{
@@ -15,7 +14,7 @@ instance.interceptors.request.use((config)=>{
 instance.interceptors.response.use((rsp)=>{
     return rsp;
 },(err)=>{
-    if(err.response.status == 401){
+    if(err.response.status === 401){
         window.location.href="/";
     }
     return err;
