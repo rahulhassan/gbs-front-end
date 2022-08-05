@@ -18,6 +18,37 @@ const OrderDetails=()=>{
     },[]);
 
 
+    const[b_name,setName]=useState("");
+    const[b_phn,setPhone]=useState("");
+    const[b_add,setAddress]=useState("");
+    const[payment_type,setPayment]=useState("");
+    const[msg,setMsg]=useState("");
+    const[err,setErr]=useState("");
+
+    const handleForm=(event)=>
+    {
+        event.preventDefault();
+        var data={b_name:b_name,b_phn:b_phn,b_add:b_add,payment_type:payment_type}
+        axiosConfig.post(`/orderDetails/${title}`,data)
+        .then((rsp)=>{
+            setMsg(rsp.data.msg);
+            setErr(rsp.data);
+            //debugger;
+        },(er)=>{
+            if(er.response.status==422)
+            {
+                setErr(err.response.data);
+            }
+            else
+            {
+                setMsg("Server Error Occured");
+            }
+            //debugger;
+        })
+    }
+
+
+
     return(
 
         <div>
@@ -35,7 +66,8 @@ const OrderDetails=()=>{
 
 
             <div class="container" style={{padding: "30px 0"}}>
-            {/* <form action="{{route('buyer.other.placeOrderSubmit',['title'=>$products->p_title])}}" method="post"> */}
+
+           <form onSubmit={handleForm}>
 
             
 
@@ -57,15 +89,13 @@ const OrderDetails=()=>{
                         
                             <div class="col-sm-4">
                                     <h5>Shipping Information</h5>
-                                    <table  class="table table-striped bg-dark text-light table-responsive-sm" style={{width:"300px",height:"320px"}}>
+                                    <table  class="table table-striped table-responsive-sm" style={{width:"300px",height:"320px"}}>
                                     <tr>
                                         <td><b>Name</b></td>
                                         <td><b>:</b></td>
                                         <td>
-                                            {/* <b><input type="text" class="form-control" name="name" value="{{old('name')}}"></b>
-                                        @error('name')
-                                                <span class="text-danger">{{$message}}</span>
-                                        @enderror */}
+                                        <input type="text" value={b_name} onChange={(e)=>{setName(e.target.value)}}></input>
+                                        <span>{err.b_name? err.b_name[0]:''}</span>
                                         </td>
                                     </tr>
 
@@ -75,10 +105,8 @@ const OrderDetails=()=>{
                                         <td><b>Phone</b></td>
                                         <td><b>:</b></td>
                                         <td>
-                                            {/* <b><input type="text" class="form-control " name="phone" value="{{old('phone')}}"></b>
-                                        @error('phone')
-                                                <span class="text-danger">{{$message}}</span>
-                                        @enderror */}
+                                        <input type="text" value={b_phn} onChange={(e)=>{setPhone(e.target.value)}}></input>
+                                        <span>{err.b_phn? err.b_phn[0]:''}</span>
                                         </td>
                                     </tr>
 
@@ -88,11 +116,8 @@ const OrderDetails=()=>{
                                         <td><b>Address</b></td>
                                         <td><b>:</b></td>
                                         <td>
-                                            {/* <b><input type="text" class="form-control" name="address" value="{{old('address')}}"></b>
-
-                                        @error('address')
-                                                <span class="text-danger">{{$message}}</span>
-                                        @enderror */}
+                                        <input type="text" value={b_add} onChange={(e)=>{setAddress(e.target.value)}}></input>
+                                        <span>{err.b_add? err.b_add[0]:''}</span>
                                         </td>
                                     </tr>
 
@@ -110,7 +135,7 @@ const OrderDetails=()=>{
                                                     <tr>
                                                             <td>
                                                                     <div class="input-radio">
-                                                                            {/* <input type="radio" name="payment" id="payment-1" value="Cash"> */}
+                                                                    <input type="radio" name={payment_type} value={payment_type} onChange={(e)=>{setAddress(e.target.value)}}></input>
                                                                             
                                                                             <label for="payment-1">
                                                                                     <span></span>
@@ -126,7 +151,7 @@ const OrderDetails=()=>{
                                                     <tr>
                                                             <td>
                                                                     <div class="input-radio">
-                                                                            {/* <input type="radio" name="payment" id="payment-2" value="Bkash"> */}
+                                                                    <input type="radio" name={payment_type}  value={b_add} onChange={(e)=>{setAddress(e.target.value)}}></input>
                                                                     
                                                                             <label for="payment-2">
                                                                                     Bkash
@@ -142,7 +167,7 @@ const OrderDetails=()=>{
                                                     <tr>
                                                             <td>
                                                                     <div class="input-radio">
-                                                                                    {/* <input type="radio" name="payment" id="payment-3" value="Nogod"> */}
+                                                                    <input type="radio" name={payment_type} value={b_add} onChange={(e)=>{setAddress(e.target.value)}}></input>
                                                                             
                                                                             <label for="payment-3">
                                                                                     Nogod
@@ -158,7 +183,7 @@ const OrderDetails=()=>{
                                                     <tr>
                                                             <td>
                                                                     <div class="input-radio">
-                                                                                    {/* <input type="radio" name="payment" id="payment-4" value="Rocket"> */}
+                                                                    <input type="radio" name={payment_type} value={b_add} onChange={(e)=>{setAddress(e.target.value)}}></input>
                                                                     
                                                                             <label for="payment-4">
                                                                                     Rocket
@@ -174,21 +199,19 @@ const OrderDetails=()=>{
 
                                                 
                                             </table>
-                                                    {/* @error('payment')
-                                                    <span class="text-danger"><b>{{$message}}</b></span>
-                                                    @enderror */}
-
+                                            <span>{err.payment_type? err.payment_type[0]:''}</span>
                                                     <br/><br/>
                                     </div>
-
+</div>
                     </div>
-                    {/* <button type="Submit" class="btn btn-success" >PLACE ORDER</button> */}
-                    <Link to={"/orderCompleted"} ><button type="Submit" class="btn btn-success" >PLACE ORDER</button></Link>
-                {/* </form> */}
+                    <button type="Submit" class="btn btn-success" >PLACE ORDER</button>
+                    {/* <Link to={"/orderCompleted"} ><button type="Submit" class="btn btn-success" >PLACE ORDER</button></Link> */}
+                </form>
             </div>
 
             </div>
-        </div>
+    
+
     )
 }
 export default OrderDetails;
