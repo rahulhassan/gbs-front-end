@@ -40,7 +40,7 @@ const Dashboard=()=>{
                                     <table className="table table-striped bg-dark text-light">
                                             <tr key={product.p_title}>
                                                 <td rowSpan={3}>
-                                                <Link to={`/productDetails/${product.p_title}`}><img src={`http://localhost:8000/images/${product.image_path}`}></img></Link>
+                                                <Link to={`/productDetails/${product.p_title}`}><img src={`http://localhost:8000/images/${product.image_path}`} height="250px" width="250px"></img></Link>
                                                 </td>
                                             </tr>
                                             <tr>

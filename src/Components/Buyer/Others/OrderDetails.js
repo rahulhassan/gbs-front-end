@@ -2,6 +2,7 @@ import {Link, useParams} from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import axiosConfig from '../../axiosConfig';
 
+
 const OrderDetails=()=>{
 
     const {title} = useParams();
@@ -17,7 +18,7 @@ const OrderDetails=()=>{
         }) 
     },[]);
 
-
+   
     const[b_name,setName]=useState("");
     const[b_phn,setPhone]=useState("");
     const[b_add,setAddress]=useState("");
@@ -29,7 +30,7 @@ const OrderDetails=()=>{
     {
         event.preventDefault();
         var data={b_name:b_name,b_phn:b_phn,b_add:b_add,payment_type:payment_type}
-        axiosConfig.post(`/orderDetails/${title}`,data)
+        axiosConfig.post(`/placeOrder/${title}`,data)
         .then((rsp)=>{
             setMsg(rsp.data.msg);
             setErr(rsp.data);
@@ -57,21 +58,13 @@ const OrderDetails=()=>{
             <h4 style={{textAlign:"center",fontFamily: "myFirstFont"}}>Order Overview</h4>
             <hr/>
 
-            {/* @if(session('orderPlaced'))
-                    <div class="alert alert-warning" role="alert">
-                        <b>{{session('orderPlaced')}}</b>
-                        
-                    </div>
-            @endif */}
-
+           
 
             <div class="container" style={{padding: "30px 0"}}>
 
            <form onSubmit={handleForm}>
 
             
-
-                    {/* @csrf */}
                     <div class="row">
                 
                             <div class="col-sm-4 ">
@@ -79,12 +72,7 @@ const OrderDetails=()=>{
                                 <img src={`http://localhost:8000/images/${product.image_path}`} height="180px" width="200px"></img><br/><br/>
                                 <b>Title: {product.p_title}</b><br/>
                                 <b>Price: {product.p_price}</b><br/>
-                                {/* <!-- <b>Quantity: {product.p_quantity}</b><br> -->
-
-                                <!-- <b>Your Quantity:<input type="text" class="form-control " name="quantity" value="{{old('quantity')}}" style="width:50px"></b>
-                                        @error('quantity')
-                                                <span class="text-danger">{{$message}}</span>
-                                        @enderror --> */}
+                               
                             </div>
                         
                             <div class="col-sm-4">
@@ -94,7 +82,7 @@ const OrderDetails=()=>{
                                         <td><b>Name</b></td>
                                         <td><b>:</b></td>
                                         <td>
-                                        <input type="text" value={b_name} onChange={(e)=>{setName(e.target.value)}}></input>
+                                        <input type="text" name="b_name" value={b_name} onChange={(e)=>{setName(e.target.value)}}></input><br></br>
                                         <span>{err.b_name? err.b_name[0]:''}</span>
                                         </td>
                                     </tr>
@@ -105,7 +93,7 @@ const OrderDetails=()=>{
                                         <td><b>Phone</b></td>
                                         <td><b>:</b></td>
                                         <td>
-                                        <input type="text" value={b_phn} onChange={(e)=>{setPhone(e.target.value)}}></input>
+                                        <input type="text" name="b_phn" value={b_phn} onChange={(e)=>{setPhone(e.target.value)}}></input><br></br>
                                         <span>{err.b_phn? err.b_phn[0]:''}</span>
                                         </td>
                                     </tr>
@@ -116,7 +104,7 @@ const OrderDetails=()=>{
                                         <td><b>Address</b></td>
                                         <td><b>:</b></td>
                                         <td>
-                                        <input type="text" value={b_add} onChange={(e)=>{setAddress(e.target.value)}}></input>
+                                        <input type="text" name="b_add" value={b_add} onChange={(e)=>{setAddress(e.target.value)}}></input><br></br>
                                         <span>{err.b_add? err.b_add[0]:''}</span>
                                         </td>
                                     </tr>
@@ -135,7 +123,7 @@ const OrderDetails=()=>{
                                                     <tr>
                                                             <td>
                                                                     <div class="input-radio">
-                                                                    <input type="radio" name={payment_type} value={payment_type} onChange={(e)=>{setAddress(e.target.value)}}></input>
+                                                                    <input type="radio" name="payment_type" value="Cash" onChange={(e)=>{setPayment(e.target.value)}}></input>
                                                                             
                                                                             <label for="payment-1">
                                                                                     <span></span>
@@ -151,7 +139,7 @@ const OrderDetails=()=>{
                                                     <tr>
                                                             <td>
                                                                     <div class="input-radio">
-                                                                    <input type="radio" name={payment_type}  value={b_add} onChange={(e)=>{setAddress(e.target.value)}}></input>
+                                                                    <input type="radio" name="payment_type"   value="Bkash" onChange={(e)=>{setPayment(e.target.value)}}></input>
                                                                     
                                                                             <label for="payment-2">
                                                                                     Bkash
@@ -167,7 +155,7 @@ const OrderDetails=()=>{
                                                     <tr>
                                                             <td>
                                                                     <div class="input-radio">
-                                                                    <input type="radio" name={payment_type} value={b_add} onChange={(e)=>{setAddress(e.target.value)}}></input>
+                                                                    <input type="radio" name="payment_type"   value="Nogod" onChange={(e)=>{setPayment(e.target.value)}}></input>
                                                                             
                                                                             <label for="payment-3">
                                                                                     Nogod
@@ -183,7 +171,7 @@ const OrderDetails=()=>{
                                                     <tr>
                                                             <td>
                                                                     <div class="input-radio">
-                                                                    <input type="radio" name={payment_type} value={b_add} onChange={(e)=>{setAddress(e.target.value)}}></input>
+                                                                    <input type="radio" name="payment_type"   value="Rocket" onChange={(e)=>{setPayment(e.target.value)}}></input>
                                                                     
                                                                             <label for="payment-4">
                                                                                     Rocket
@@ -200,13 +188,18 @@ const OrderDetails=()=>{
                                                 
                                             </table>
                                             <span>{err.payment_type? err.payment_type[0]:''}</span>
-                                                    <br/><br/>
+                                                    
                                     </div>
 </div>
+<button type="Submit" class="btn btn-success" >PLACE ORDER</button>
                     </div>
-                    <button type="Submit" class="btn btn-success" >PLACE ORDER</button>
+                    
+                   
+                    {/* <input type="submit" value="login"/> */}
                     {/* <Link to={"/orderCompleted"} ><button type="Submit" class="btn btn-success" >PLACE ORDER</button></Link> */}
+                  
                 </form>
+                {msg}
             </div>
 
             </div>

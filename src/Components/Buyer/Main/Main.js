@@ -22,6 +22,7 @@ const Main=()=>{
                     <Route path="/dashboard" element={<Dashboard></Dashboard>}></Route>
                     <Route path="/productDetails/:title" element={<ProductDetails></ProductDetails>}> </Route>
                     <Route path="/orderDetails/:title" element={<OrderDetails></OrderDetails>}> </Route>
+                    {/* <Route path="/placeOrder/:title" element={<OrderDetails></OrderDetails>}> </Route> */}
                     <Route path="/orderCompleted" element={<OrderCompleted></OrderCompleted>}> </Route>
                     <Route path="/profile" element={<Profile></Profile>}> </Route>
                     <Route path="/updateProfile" element={<UpdateProfile></UpdateProfile>}> </Route>
