@@ -15,6 +15,38 @@ const ProductDetails=()=>{
 
         }) 
     },[]);
+
+
+    
+    const[p_id,setProductId]=useState("");
+    const[p_price,setProductPrice]=useState("");
+    const[s_id,setSellerId]=useState("");
+    const[msg,setMsg]=useState("");
+    const[err,setErr]=useState("");
+
+    const handleForm=(event)=>
+    {
+        event.preventDefault();
+        var data={p_id:p_id,p_price:p_price,s_id:s_id}
+        axiosConfig.post("/cart",data)
+        .then((rsp)=>{
+            setMsg(rsp.data.msg);
+            setErr(rsp.data);
+            //debugger;
+        },(er)=>{
+            if(er.response.status==422)
+            {
+                setErr(err.response.data);
+            }
+            else
+            {
+                setMsg("Server Error Occured");
+            }
+            //debugger;
+        })
+    }
+
+
     return(
         <div>
                 
@@ -68,13 +100,16 @@ const ProductDetails=()=>{
 
                                                 </table>
 
-                                                {/* <form action="" method="post">
+                                                <form onSubmit={handleForm}>
                                                   
-                                                    <input type="hidden" name="p_id" value="{{$products->p_id}}">
-                                                    <input type="hidden" name="p_price" value="{{$products->p_price}}">
-                                                    <input type="hidden" name="s_id" value="{{$products->s_id}}">
-                                                    <button type="Submit" id="addToCart" onclick="myFunction()" class="btn btn-warning" style="margin-right:20px; float:left">Add to Cart</button>
-                                                </form> */}
+                                                    <input type="text" name="p_id"    value={product.p_id}  onChange={(e)=>{setProductId(e.target.value)}}></input><br></br>
+                                                    <span>{err.p_id? err.p_id[0]:''}</span>
+                                                    <input type="text" name="p_price"  value={product.p_price} onChange={(e)=>{setProductPrice(e.target.value)}}></input><br></br>
+                                                    <span>{err.p_price? err.p_price[0]:''}</span>
+                                                    <input type="text" name="s_id"        onChange={(e)=>{setSellerId(e.target.value)}}></input><br></br>
+                                                    <span>{err.s_id? err.s_id[0]:''}</span>
+                                                    <button type="Submit"  class="btn btn-warning" style={{marginRight: "20px", float:"left"}}>Add to Cart</button>
+                                                </form>
 
                                             
 
@@ -86,6 +121,7 @@ const ProductDetails=()=>{
                                                 
 
                                 </div>
+                                {msg}
                             </div>
                     </div>
 
