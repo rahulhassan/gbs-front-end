@@ -3,12 +3,15 @@ import axios from 'axios';
 import swal from 'sweetalert';
 import {Link} from 'react-router-dom';
 const ProductsList=()=>{
+    const [loading, setLoading] =useState(true);
+    
     const [products ,setProducts] = useState([]);
     useEffect(()=>{
         axios.get("http://localhost:8000/api/seller/products")
         .then((rsp)=>{
             setProducts(rsp.data);
             console.log(rsp.data);
+            setLoading(false);
         },(err)=>{
 
         }) 
@@ -62,10 +65,13 @@ const ProductsList=()=>{
         //     debugger;
         // });
     }
+    if(loading){
+        return (<h4>Post loading...</h4>)
+    }
    
     return(
-        <div>
-            <div className="w-75">
+        <div className="container py-5 h-150">
+            <div className="w-75 row d-flex justify-content-center align-items-center">
                 {
                     products.map((p)=>(
                         <div key={p.p_id} className="row">
