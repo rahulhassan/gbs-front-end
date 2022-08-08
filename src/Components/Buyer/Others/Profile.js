@@ -1,4 +1,22 @@
+
+import axiosConfig from '../../axiosConfig';
+import {Link} from 'react-router-dom';
+import {useState,useEffect} from 'react';
+
 const Profile=()=>{
+
+    const [buyer,setBuyer] = useState({});
+
+    useEffect(()=>{
+        axiosConfig.get("/profile")
+        .then((rsp)=>{
+            setBuyer(rsp.data);
+            console.log(rsp);
+        },(err)=>{
+
+        }) 
+    },[]);
+
     return(
         <div>
 
@@ -10,15 +28,15 @@ const Profile=()=>{
                         <div class="row">
                                              
                                 <div class="col-sm-4 ">
-                                    {/* @if($buyer->b_image==null)
+                                    {/* @if($buyer->b_image==null) */}
                                     
-                                        <img src="dummy/download.png" width="300px" alt="">
+                                        {/* <img src="dummy/download.png" width="300px" alt=""> */}
                                     
-                                    @else
+                                    {/* @else */}
                                     
-                                        <img src="{{asset('buyerImages/'.$buyer->b_image)}}" width="300px" height="300px" alt="">
+                                    {/* <img src={`http://localhost:8000/images/${buyer.b_image}`} height="300px" width="300px"></img> */}
                                      
-                                    @endif  */}
+                                    {/* @endif  */}
                                     
 
 
@@ -29,26 +47,26 @@ const Profile=()=>{
                                         <tr>
                                             <td><b>Name</b></td>
                                             <td><b>:</b></td>
-                                            <td></td>
+                                            <td>{buyer.b_name}</td>
                                             
                                             {/* <td><b>{{$buyer->b_name}}</b></td> */}
                                         </tr>
                                         <tr>
                                             <td><b>Email</b></td>
                                             <td><b>:</b></td>
-                                            <td></td>
+                                            <td>{buyer.b_mail}</td>
                                             {/* <td><b>{{$buyer->b_mail}}</b></td> */}
                                         </tr>
                                         <tr>
                                             <td><b>Phone</b></td>
                                             <td><b>:</b></td>
-                                            <td></td>
+                                            <td>{buyer.b_phn}</td>
                                             {/* <td><b>{{$buyer->b_phn}}</b></td> */}
                                         </tr>
                                         <tr>
                                             <td><b>Address</b></td>
                                             <td><b>:</b></td>
-                                            <td></td>
+                                            <td>{buyer.b_add}</td>
                                             {/* <td><b>{{$buyer->b_add}}</b></td> */}
                                         </tr>
                                     </table>

@@ -49,11 +49,14 @@ const ProductDetails=()=>{
 
     return(
         <div>
-                
+           
                     <hr/>
                     <h4 style={{textAlign:"center",fontFamily: "myFirstFont"}}>{product.p_title} </h4>
                     <hr/>
                 
+                    <div class="alert alert-warning" role="alert">
+                    <b>{msg}</b>
+                    </div>
 
                     <div class="alert alert-dark" role="alert" style={{float:"right",marginRight:"70px"}}>
                     <span><b>Total: </b> </span> 
@@ -73,7 +76,7 @@ const ProductDetails=()=>{
                                     <div class="col-sm-8">
 
 
-                                                <table class="table table-striped  table-hover bg-dark text-light" style={{height:"100px"}}>
+                                                <table className="table table-striped  table-hover bg-dark text-light" style={{height:"100px"}}>
                                                     
                                                     <tr>
                                                 
@@ -102,9 +105,9 @@ const ProductDetails=()=>{
 
                                                 <form onSubmit={handleForm}>
                                                   
-                                                    <input type="text" name="p_id"    value={product.p_id}  onChange={(e)=>{setProductId(e.target.value)}}></input><br></br>
+                                                    <input type="text" name="p_id"   value={product.p_id}  onChange={(e)=>{setProductId(e.target.value)}}></input><br></br>
                                                     <span>{err.p_id? err.p_id[0]:''}</span>
-                                                    <input type="text" name="p_price"  value={product.p_price} onChange={(e)=>{setProductPrice(e.target.value)}}></input><br></br>
+                                                    <input type="text" name="p_price"   onChange={(e)=>{setProductPrice(e.target.value)}}></input><br></br>
                                                     <span>{err.p_price? err.p_price[0]:''}</span>
                                                     <input type="text" name="s_id"        onChange={(e)=>{setSellerId(e.target.value)}}></input><br></br>
                                                     <span>{err.s_id? err.s_id[0]:''}</span>
@@ -121,7 +124,7 @@ const ProductDetails=()=>{
                                                 
 
                                 </div>
-                                {msg}
+                               
                             </div>
                     </div>
 
