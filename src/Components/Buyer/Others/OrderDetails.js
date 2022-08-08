@@ -59,6 +59,9 @@ const OrderDetails=()=>{
             <hr/>
 
            
+            <div class="alert alert-success" role="alert">
+                    <b>{msg}</b>
+            </div>
 
             <div class="container" style={{padding: "30px 0"}}>
 
@@ -199,7 +202,7 @@ const OrderDetails=()=>{
                     {/* <Link to={"/orderCompleted"} ><button type="Submit" class="btn btn-success" >PLACE ORDER</button></Link> */}
                   
                 </form>
-                {msg}
+               
             </div>
 
             </div>

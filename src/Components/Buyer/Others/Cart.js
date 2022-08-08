@@ -51,7 +51,7 @@ const Cart=()=>{
                             </div>
                             <div class="col-sm-10">
                         
-                                    <table class="table  table-striped bg-dark text-white" >
+                                    <table className="table  table-striped bg-dark text-white" >
                                             <tr>
                                                 <th>Products</th>
                                                 <th>Price</th>      
@@ -61,18 +61,18 @@ const Cart=()=>{
                                                 <th> </th>
                                             </tr>
                                             {
-                                                  products.map((product)=>(
+                                                  products.map((cart)=>(
                                            
-                                                    <tr key={product.p_title}>
+                                                    <tr key={cart.p_title}>
                                                     <td>
-                                                            <img src={`http://localhost:8000/images/${product.image_path}`}  height="80px" width="80px" alt=""></img>
-                                                           {product.p_title}
+                                                            <img src={`http://localhost:8000/images/${cart.product.image_path}`}  height="80px" width="80px" alt=""></img>
+                                                           {cart.product.p_title}
                                                     </td>
                                                     
                                             
                                                     
                                                         <td >
-                                                           {product.p_price}
+                                                           {cart.p_price}
                                                         </td>
                                                         
                                             
@@ -89,14 +89,14 @@ const Cart=()=>{
                                                                             </button>
                                                                             <button class="btn btn-link px-2"
                                                                             onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                                            <i class="fas fa-plus"></i>
+                                                                            <i class="fas fa-plus "></i>
                                                                             </button>
                                                                                     
                                                                             {/* <form action="{{url('cart/quantity/update/'.$c->c_id)}}" method="post"> */}
                                                                             {/* @csrf */}
                                                                             
-                                                                                    {/* <input id="form1" min="1" name="quantity" style="width:50px" value="{{$c->p_quantity}}" type="number"
-                                                                                    class="form-control form-control-sm" /> */}
+                                                                                    <input id="form1" min="1" name="quantity" style={{width:"50px"}} value={cart.p_quantity} type="number"
+                                                                                    class="form-control form-control-sm" />
 
                                                                                     
                                                                         
@@ -105,12 +105,12 @@ const Cart=()=>{
                                                             
                                                         </td>
                                                         <td>
-                                                            <button type="Submit" class="btn btn-info" >Update</button>
+                                                            <button type="Submit" class="btn btn-success">Update</button>
                                                             {/* </form> */}
                                                         
                                                         </td>
                                                         <td>
-                                                                {/* {{$c->p_price * $c->p_quantity}}     */}
+                                                                {cart.p_price * cart.p_quantity}   
                                                         </td>
                                                             <td>
                                                             {/* <a href="{{url('cart/destroy/'.$c->c_id)}}"><button type="button" class="btn-close btn-close-white" aria-label="Close"></button></a> */}
