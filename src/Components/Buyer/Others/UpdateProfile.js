@@ -39,7 +39,7 @@ const UpdateProfile=()=>{
 
     const handleForm = (e) =>{
         e.preventDefault();
-        const fData = new FormData();
+        var fData = new FormData();
         fData.append("b_image", b_image);
         fData.append("b_name", b_name);
         fData.append("b_mail", b_mail);
@@ -55,8 +55,12 @@ const UpdateProfile=()=>{
         })
         .then((willUpdate) => {
             if (willUpdate) {
-                //console.log(image);
-                axiosConfig.put("/updateProfile",fData)
+                // console.log(b_image);
+                // console.log(b_name);
+                // console.log(b_mail);
+                // console.log(b_phn);
+                // console.log(b_add);
+                axiosConfig.post("/updateProfile",fData)
                 .then((rsp)=>{
                     if (rsp.data.status === 200) {
                         //navigate('/seller/dashboard');
@@ -82,16 +86,16 @@ const UpdateProfile=()=>{
 
     // const handleForm=(event)=>{
     //     event.preventDefault();
-    //     const fData = new FormData();
-    //     fData.append("b_image", b_image);
-    //     fData.append("b_name", b_name);
+    //     var fData = new FormData();
+    //     fData.append("b_image",b_image.name);
+    //     fData.append("b_name", b_name.name);
     //     fData.append("b_mail", b_mail);
     //     fData.append("b_phn", b_phn);
     //     fData.append("b_add", b_add);
     
     //     //var data = { p_title:p_title,p_brand:p_brand, p_price:p_price, Category:Category, p_description:p_description, p_quantity:p_quantity, image:image};
     //     console.log(fData)
-    //     axiosConfig.post("/updateProfile",fData)
+    //     axiosConfig.put("/updateProfile",fData)
     //      .then((rsp)=>{
     //     setMsg(rsp.data.msg);
     //     setErr(rsp.data);
@@ -107,7 +111,7 @@ const UpdateProfile=()=>{
     //     }
     //     //debugger;
     // })
-    //}
+    // }
 
 
 
@@ -149,15 +153,16 @@ const UpdateProfile=()=>{
                         
                                     <div class="col-sm-4">
                                         
-                                    {/* @if($buyer->b_image==null) */}
+                                    {buyer.b_image==null? <img src="http://localhost:8000/dummy/download.png" width="300px" alt=""></img>:
+                                      <img src={`http://localhost:8000/buyerImages/${buyer.b_image}`} width="300px" height="300px" alt=""></img> }
                                         
-                                    <img src="http://localhost:8000/dummy/download.png" width="300px" alt=""></img>
+                                   
                                         
-                                        {/* @else */}
+                                      
                                         
-                                            {/* <img src="{{asset('buyerImages/'.$buyer->b_image)}}" width="300px" height="300px" alt=""> */}
+                                          
                                         
-                                        {/* @endif */}
+    
 
 
                                     <br></br>
@@ -170,7 +175,7 @@ const UpdateProfile=()=>{
                                             <tr>
                                                 <td><b>Name</b></td>
                                                 <td><b>:</b></td>
-                                                <td><b><input type="text" class="form-control" name="b_name" value={b_name || ''}  onChange={(e)=>{setName(e.target.value)}}></input></b>
+                                                <td><b><input type="text" class="form-control" name="b_name" value={b_name}  onChange={(e)=>{setName(e.target.value)}}></input></b>
                                                 <span>{err.b_name? err.b_name[0]:''}</span>
                                                 </td>
                                             </tr>
@@ -180,7 +185,7 @@ const UpdateProfile=()=>{
                                             <tr>
                                                 <td><b>Email</b></td>
                                                 <td><b>:</b></td>
-                                                <td><b><input type="text" class="form-control " name="b_mail" value={b_mail || ''}  onChange={(e)=>{setMail(e.target.value)}}disabled></input></b>
+                                                <td><b><input type="text" class="form-control " name="b_mail" value={b_mail}  onChange={(e)=>{setMail(e.target.value)}}disabled></input></b>
                                                 <span>{err.b_mail? err.b_mail[0]:''}</span>
                                                 </td>
                                             </tr>
@@ -190,7 +195,7 @@ const UpdateProfile=()=>{
                                             <tr>
                                                 <td><b>Phone</b></td>
                                                 <td><b>:</b></td>
-                                                <td><b><input type="text" class="form-control" name="b_phn" value={b_phn || ''}  onChange={(e)=>{setPhone(e.target.value)}}></input></b>
+                                                <td><b><input type="text" class="form-control" name="b_phn" value={b_phn}  onChange={(e)=>{setPhone(e.target.value)}}></input></b>
 
                                                 <span>{err.b_phn? err.b_phn[0]:''}</span>
                                                 </td>
@@ -201,7 +206,7 @@ const UpdateProfile=()=>{
                                             <tr>
                                                 <td><b>Address</b></td>
                                                 <td><b>:</b></td>
-                                                <td><b><input type="text" class="form-control" name="b_add" value={b_add || ''}  onChange={(e)=>{setAddress(e.target.value)}}></input></b>
+                                                <td><b><input type="text" class="form-control" name="b_add" value={b_add}  onChange={(e)=>{setAddress(e.target.value)}}></input></b>
 
                                                 <span>{err.b_add? err.b_add[0]:''}</span>
                                                 </td>

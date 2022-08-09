@@ -28,19 +28,13 @@ const Profile=()=>{
                         <div class="row">
                                              
                                 <div class="col-sm-4 ">
-                                    {/* @if($buyer->b_image==null) */}
-                                    
-                                        {/* <img src="dummy/download.png" width="300px" alt=""> */}
-                                    
-                                    {/* @else */}
-                                    
-                                    {/* <img src={`http://localhost:8000/images/${buyer.b_image}`} height="300px" width="300px"></img> */}
-                                     
-                                    {/* @endif  */}
+                                {buyer.b_image==null? <img src="http://localhost:8000/dummy/download.png" width="300px" alt=""></img>:
+                                      <img src={`http://localhost:8000/buyerImages/${buyer.b_image}`} width="300px" height="300px" alt=""></img> }
+                                        
                                     
 
 
-                                    <img src="http://localhost:8000/dummy/download.png" width="300px" alt=""></img>
+                                   
                                 </div>
                                 <div class="col-sm-8">
                                     <table  class="table table-striped bg-dark text-light table-responsive-sm" style={{width:"500px", height:"300px"}}>
