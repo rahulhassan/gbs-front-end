@@ -2,6 +2,8 @@
 import axiosConfig from '../../axiosConfig';
 import {Link, useParams} from 'react-router-dom';
 import {useState,useEffect} from 'react';
+import swal from 'sweetalert';
+import axios from 'axios';
 
 const Orders=()=>{
 
@@ -21,7 +23,7 @@ const Orders=()=>{
     
 
 
-    // const deleteOrder=()=>{
+    // const DeleteOrder=()=>{
     //     axiosConfig.post(`/my_orders/delete/${id}`)
     //     .then((rsp)=>{
             
@@ -30,15 +32,52 @@ const Orders=()=>{
     //     })
     // }
 
+    const DeleteOrder = (e, id)=>{
+        e.preventDefault();
+        const thisClicked = e.currentTarget;
+        thisClicked.innerText = "Deleting";
+        swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this product!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                if (willDelete) {
+                    axiosConfig.delete(`/my_orders/delete/${id}`)
+                    .then((rsp)=>{
+                        if(rsp.data.status === 200){
+                            swal("Success", rsp.data.message, "success");
+                            thisClicked.closest("tr").remove();
+                        }
+                        else if(rsp.data.status === 404){
+                            swal("Success", rsp.data.message, "success")
+                            thisClicked.innerText = "Delete";
+                        }
+                    },(err)=>{
+                        debugger;
+                    });
+                    // thisClicked.closest("div").remove();
+                } else {
+                    swal("Canceled!");
+                    thisClicked.innerText = "Delete";
+                }
+            });
+
+        }
+
     function deleteOrder(id)
     {
-        // fetch(`/my_orders/delete/${id}`,{
-        //     method: 'DELETE'
-        // }).then((result)=>{
-          
-        //         console.log(result);
+        fetch(`/my_orders/delete/${id}`,{
+            method: 'DELETE'
+        }).then((result)=>{
+          result.json().then((rsp)=>{
+            console.warn(rsp);
+          })
+                
   
-        // })
+        })
         alert(id)
     }
     return(
@@ -67,9 +106,11 @@ const Orders=()=>{
                         <th>Product Quantity</th>
                         <th>Price</th>
                         <th>Status</th>
+                        
                             {
+                               
                                 orders.map((order)=>(
-                                    
+                                
                                             <tr key={order.p_title}>
                                                 <td >
                                                 <img src={`http://localhost:8000/images/${order.product.image_path}`} height="80px" width="80px"></img>
@@ -79,14 +120,17 @@ const Orders=()=>{
                                                 <td>{order.p_quantity}</td>                   
                                                  <td>{order.product.p_price*order.p_quantity}</td>
                                                  <td>{order.payment_status}</td>
-                                                 {/* <form onSubmit={deleteOrder}> */}
-                                                 <td><button type="button" onClick={()=>{deleteOrder(order.id)}} class="btn btn-danger">Delete</button></td>
-                                                 {/* </form> */}
+
+                                                 <td><button type="button" onClick={(e)=>DeleteOrder(e,order.order_id)} class="btn btn-danger">Delete</button></td>
+                                                 {/* <td><button type="button" onClick={()=>{ deleteOrder(order.order_id)}} class="btn btn-danger">Delete</button></td> */}
+                                             
                                             </tr>
+                                           
                                             // {orderDeleted}
                                        
                                 ))
                             }
+                             
                        
                        </table>
 

@@ -1,6 +1,9 @@
 import axiosConfig from '../../axiosConfig';
 import {Link} from 'react-router-dom';
 import {useState,useEffect} from 'react';
+import swal from 'sweetalert';
+import { useNavigate } from "react-router-dom";
+
 
 const UpdateProfile=()=>{
 
@@ -10,12 +13,101 @@ const UpdateProfile=()=>{
         axiosConfig.get("/updateProfile")
         .then((rsp)=>{
             setBuyer(rsp.data);
-            console.log(rsp);
+            setImage(rsp.data.b_image);
+            setName(rsp.data.b_name);
+            setMail(rsp.data.b_mail);
+            setPhone(rsp.data.b_phn);
+            setAddress(rsp.data.b_add);
+           
+            //console.log(rsp);
         },(err)=>{
 
         }) 
     },[]);
 
+    const navigate = useNavigate();
+    const[b_image,setImage] = useState("");
+    const[b_name,setName] = useState("");
+    const[b_mail,setMail] = useState("");
+    const[b_phn,setPhone] = useState("");
+    const[b_add,setAddress] = useState("");
+    const[msg,setMsg]=useState("");
+
+   
+
+    const[err,setErr] = useState("");
+
+    const handleForm = (e) =>{
+        e.preventDefault();
+        const fData = new FormData();
+        fData.append("b_image", b_image);
+        fData.append("b_name", b_name);
+        fData.append("b_mail", b_mail);
+        fData.append("b_phn", b_phn);
+        fData.append("b_add", b_add);
+
+
+
+        const thisClicked = e.currentTarget;
+        thisClicked.innerText = "Updating";
+        swal("Do you want to update?", {
+            buttons: ["No", "Yes"],
+        })
+        .then((willUpdate) => {
+            if (willUpdate) {
+                //console.log(image);
+                axiosConfig.put("/updateProfile",fData)
+                .then((rsp)=>{
+                    if (rsp.data.status === 200) {
+                        //navigate('/seller/dashboard');
+                        swal('Success', rsp.data.msg, 'success')
+                    } else if (rsp.data.status === 422) {
+                        setErr(rsp.data.errors)
+                        thisClicked.innerText = "Update";
+                    }
+                })
+                
+            } else {
+                swal("Profile is not Updated");
+                thisClicked.innerText = "Update";
+                
+            }
+        });
+    }
+
+
+
+
+
+
+    // const handleForm=(event)=>{
+    //     event.preventDefault();
+    //     const fData = new FormData();
+    //     fData.append("b_image", b_image);
+    //     fData.append("b_name", b_name);
+    //     fData.append("b_mail", b_mail);
+    //     fData.append("b_phn", b_phn);
+    //     fData.append("b_add", b_add);
+    
+    //     //var data = { p_title:p_title,p_brand:p_brand, p_price:p_price, Category:Category, p_description:p_description, p_quantity:p_quantity, image:image};
+    //     console.log(fData)
+    //     axiosConfig.post("/updateProfile",fData)
+    //      .then((rsp)=>{
+    //     setMsg(rsp.data.msg);
+    //     setErr(rsp.data);
+    //     //debugger;
+    // },(er)=>{
+    //     if(er.response.status==422)
+    //     {
+    //         setErr(err.response.data);
+    //     }
+    //     else
+    //     {
+    //         setMsg("Server Error Occured");
+    //     }
+    //     //debugger;
+    // })
+    //}
 
 
 
@@ -43,11 +135,16 @@ const UpdateProfile=()=>{
                     @endif */}
 
 
+                            <div class="alert alert-success" role="alert">
+                                        {/* <b>{msg}</b> */}
+                                        
+                         </div>
+
 
                     <div>
                         <div class="container" style={{padding: "30px 0"}}>
-                        {/* <form action="" method="post" enctype="multipart/form-data"> */}
-                        {/* {{@csrf_field()}} */}
+                        {/* <form onSubmit={handleForm}> */}
+
                             <div class="row">
                         
                                     <div class="col-sm-4">
@@ -64,10 +161,8 @@ const UpdateProfile=()=>{
 
 
                                     <br></br>
-                                        <input type="file" name="pro_pic"></input><br></br>
-                                                {/* @error('pro_pic')
-                                                        <span class="text-danger">{{$message}}</span><br><br>
-                                                @enderror */}
+                                        <input type="file" name="b_image"  onChange={(e)=>{setImage(e.target.files[0])}} ></input><br></br>
+                                        <span>{err.b_image? err.b_image[0]:''}</span>
                                        
                                     </div>
                                     <div class="col-sm-8">
@@ -75,10 +170,8 @@ const UpdateProfile=()=>{
                                             <tr>
                                                 <td><b>Name</b></td>
                                                 <td><b>:</b></td>
-                                                <td><b><input type="text" class="form-control" name="name" value={buyer.b_name}></input></b>
-                                                {/* @error('name')
-                                                        <span class="text-danger">{{$message}}</span>
-                                                @enderror */}
+                                                <td><b><input type="text" class="form-control" name="b_name" value={b_name || ''}  onChange={(e)=>{setName(e.target.value)}}></input></b>
+                                                <span>{err.b_name? err.b_name[0]:''}</span>
                                                 </td>
                                             </tr>
 
@@ -87,10 +180,8 @@ const UpdateProfile=()=>{
                                             <tr>
                                                 <td><b>Email</b></td>
                                                 <td><b>:</b></td>
-                                                <td><b><input type="text" class="form-control " name="email" value={buyer.b_mail} disabled></input></b>
-                                                {/* @error('email')
-                                                        <span class="text-danger">{{$message}}</span>
-                                                @enderror */}
+                                                <td><b><input type="text" class="form-control " name="b_mail" value={b_mail || ''}  onChange={(e)=>{setMail(e.target.value)}}disabled></input></b>
+                                                <span>{err.b_mail? err.b_mail[0]:''}</span>
                                                 </td>
                                             </tr>
 
@@ -99,11 +190,9 @@ const UpdateProfile=()=>{
                                             <tr>
                                                 <td><b>Phone</b></td>
                                                 <td><b>:</b></td>
-                                                <td><b><input type="text" class="form-control" name="phone" value={buyer.b_phn}></input></b>
+                                                <td><b><input type="text" class="form-control" name="b_phn" value={b_phn || ''}  onChange={(e)=>{setPhone(e.target.value)}}></input></b>
 
-                                                {/* @error('phone')
-                                                        <span class="text-danger">{{$message}}</span>
-                                                @enderror */}
+                                                <span>{err.b_phn? err.b_phn[0]:''}</span>
                                                 </td>
                                             </tr>
 
@@ -112,18 +201,16 @@ const UpdateProfile=()=>{
                                             <tr>
                                                 <td><b>Address</b></td>
                                                 <td><b>:</b></td>
-                                                <td><b><input type="text" class="form-control" name="address" value={buyer.b_add}></input></b>
+                                                <td><b><input type="text" class="form-control" name="b_add" value={b_add || ''}  onChange={(e)=>{setAddress(e.target.value)}}></input></b>
 
-                                                {/* @error('address')
-                                                        <span class="text-danger">{{$message}}</span>
-                                                @enderror */}
+                                                <span>{err.b_add? err.b_add[0]:''}</span>
                                                 </td>
                                             </tr>
 
 
 
                                         </table>
-                                        <button type="Submit" class="btn btn-success">Update</button>
+                                        <button type="Submit" onClick={handleForm} class="btn btn-success">Update</button>
                                     </div>
                         
                                     
