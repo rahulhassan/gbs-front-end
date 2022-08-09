@@ -10,6 +10,10 @@ const ProductDetails=()=>{
         axiosConfig.get(`/productDetails/${title}`)
         .then((rsp)=>{
             setProduct(rsp.data);
+            setProductId(rsp.data.p_id);
+            setProductPrice(rsp.data.p_price);
+            setSellerId(rsp.data.s_id);
+
             console.log(rsp);
         },(err)=>{
 
@@ -103,18 +107,25 @@ const ProductDetails=()=>{
 
                                                 </table>
 
-                                                <form onSubmit={handleForm}>
+                                               
                                                   
-                                                    <input type="text" name="p_id"   value={product.p_id}  onChange={(e)=>{setProductId(e.target.value)}}></input><br></br>
+                                                 <input type="hidden" name="p_id"   value={p_id ||''}  onChange={(e)=>{setProductId(e.target.value)}}></input><br></br>
                                                     <span>{err.p_id? err.p_id[0]:''}</span>
-                                                    <input type="text" name="p_price"   onChange={(e)=>{setProductPrice(e.target.value)}}></input><br></br>
+                                                    <input type="hidden" name="p_price"  value={p_price ||""}  onChange={(e)=>{setProductPrice(e.target.value)}}></input><br></br>
                                                     <span>{err.p_price? err.p_price[0]:''}</span>
-                                                    <input type="text" name="s_id"        onChange={(e)=>{setSellerId(e.target.value)}}></input><br></br>
+                                                    <input type="hidden" name="s_id"     value={s_id ||""}   onChange={(e)=>{setSellerId(e.target.value)}}></input><br></br>
                                                     <span>{err.s_id? err.s_id[0]:''}</span>
-                                                    <button type="Submit"  class="btn btn-warning" style={{marginRight: "20px", float:"left"}}>Add to Cart</button>
-                                                </form>
-
-                                            
+                                                    <button type="Submit" onClick={handleForm} class="btn btn-warning" style={{marginRight: "20px", float:"left"}}>Add to Cart</button> 
+                                              
+{/* 
+                                                    <input type="text" name="p_id"    onChange={(e)=>{setProductId(e.target.value)}}></input><br></br>
+                                                    <span>{err.p_id? err.p_id[0]:''}</span>
+                                                    <input type="text" name="p_price"    onChange={(e)=>{setProductPrice(e.target.value)}}></input><br></br>
+                                                    <span>{err.p_price? err.p_price[0]:''}</span>
+                                                    <input type="text" name="s_id"      onChange={(e)=>{setSellerId(e.target.value)}}></input><br></br>
+                                                    <span>{err.s_id? err.s_id[0]:''}</span>
+                                                    <button type="Submit" onClick={handleForm} class="btn btn-warning" style={{marginRight: "20px", float:"left"}}>Add to Cart</button>
+                                               */}
 
                                                                
                                                 <Link to={`/orderDetails/${product.p_title}`}><button type="button" class="btn btn-success" style={{marginRight:"20px",float:"left"}}>Buy Now</button></Link>
