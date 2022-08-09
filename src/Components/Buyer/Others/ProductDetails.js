@@ -109,11 +109,11 @@ const ProductDetails=()=>{
 
                                                
                                                   
-                                                 <input type="hidden" name="p_id"   value={p_id ||''}  onChange={(e)=>{setProductId(e.target.value)}}></input><br></br>
+                                                 <input type="hidden" name="p_id"   value={p_id}  onChange={(e)=>{setProductId(e.target.value)}}></input><br></br>
                                                     <span>{err.p_id? err.p_id[0]:''}</span>
-                                                    <input type="hidden" name="p_price"  value={p_price ||""}  onChange={(e)=>{setProductPrice(e.target.value)}}></input><br></br>
+                                                    <input type="hidden" name="p_price"  value={p_price}  onChange={(e)=>{setProductPrice(e.target.value)}}></input><br></br>
                                                     <span>{err.p_price? err.p_price[0]:''}</span>
-                                                    <input type="hidden" name="s_id"     value={s_id ||""}   onChange={(e)=>{setSellerId(e.target.value)}}></input><br></br>
+                                                    <input type="hidden" name="s_id"     value={s_id}   onChange={(e)=>{setSellerId(e.target.value)}}></input><br></br>
                                                     <span>{err.s_id? err.s_id[0]:''}</span>
                                                     <button type="Submit" onClick={handleForm} class="btn btn-warning" style={{marginRight: "20px", float:"left"}}>Add to Cart</button> 
                                               
