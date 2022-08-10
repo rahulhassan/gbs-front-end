@@ -1,16 +1,17 @@
 import {useState,useEffect} from 'react';
-import axios from 'axios';
+import axiosConfig from '../axiosConfig';
 import swal from 'sweetalert';
 import {Link} from 'react-router-dom';
+import NavBar from './NavBar/NavBar';
 const ProductsList=()=>{
     const [loading, setLoading] =useState(true);
-    
     const [products ,setProducts] = useState([]);
+
     useEffect(()=>{
-        axios.get("http://localhost:8000/api/seller/products")
+        
+        axiosConfig.get(`/seller/products/${localStorage.getItem("user_id")}`)
         .then((rsp)=>{
             setProducts(rsp.data);
-            console.log(rsp.data);
             setLoading(false);
         },(err)=>{
 
@@ -21,55 +22,46 @@ const ProductsList=()=>{
         const thisClicked = e.currentTarget;
         thisClicked.innerText = "Deleting";
         swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this product!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-                .then((willDelete) => {
-                if (willDelete) {
-                    axios.delete(`http://localhost:8000/api/seller/delete/${id}`)
-                    .then((rsp)=>{
-                        if(rsp.data.status === 200){
-                            swal("Success", rsp.data.message, "success");
-                            thisClicked.closest("div").remove();
-                        }
-                        else if(rsp.data.status === 404){
-                            swal("Success", rsp.data.message, "success")
-                            thisClicked.innerText = "Delete";
-                        }
-                    },(err)=>{
-                        debugger;
-                    });
-                    thisClicked.closest("div").remove();
-                } else {
-                    swal("Cancled!");
-                    thisClicked.innerText = "Delete";
-                }
-            });
-
-        // axios.delete(`http://localhost:8000/api/seller/delete/${id}`).then((rsp)=>{
-        //     console.log(rsp.data);
-        //     if(rsp.data.status === 200){
-        //         swal("Success", rsp.data.message, "success");
-        //         thisClicked.closest("div").remove();
-        //         //console.log(rsp.data);
-        //     }
-        //     else if(rsp.data.status === 404){
-        //         //console.log(rsp.data);
-        //         swal("Success", rsp.data.message, "success")
-        //         thisClicked.innerText = "Delete";
-        //     }
-        // },(err)=>{
-        //     debugger;
-        // });
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this product!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                axiosConfig.delete(`/seller/delete/${id}`)
+                .then((rsp)=>{
+                    if(rsp.data.status === 200){
+                        swal("Success", rsp.data.message, "success");
+                        thisClicked.closest("div").remove();
+                    }
+                    else if(rsp.data.status === 404){
+                        swal("Success", rsp.data.message, "success")
+                        thisClicked.innerText = "Delete";
+                    }
+                },(err)=>{
+                    debugger;
+                });
+                
+            } else {
+                swal("Cancled!");
+                thisClicked.innerText = "Delete";
+            }
+        });
     }
     if(loading){
-        return (<h4>Post loading...</h4>)
+        return (
+            <div>
+                <NavBar/>
+                <h4>Post loading...</h4>
+            </div>
+        )
     }
    
     return(
+        <div>
+        <NavBar/>
         <div className="container py-5 h-150">
             <div className="w-75 row d-flex justify-content-center align-items-center">
                 {
@@ -111,6 +103,7 @@ const ProductsList=()=>{
                     ))
                 }
             </div>
+        </div>
         </div>
     )
 }

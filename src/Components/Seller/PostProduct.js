@@ -2,6 +2,7 @@ import { useState } from "react";
 import axiosConfig from '../axiosConfig';
 import swal from 'sweetalert';
 import { useNavigate } from "react-router-dom";
+import NavBar from "./NavBar/NavBar";
 
 
 const PostProduct=()=> {
@@ -21,35 +22,35 @@ const PostProduct=()=> {
     function handleClick() {
         setButtonText('Posting...');
     }
-    const handleChange=(file)=>{
-        setImage(file[0]);
-    }
 
+    const s_id = localStorage.getItem("user_id");
+    
     const handleForm=(event)=>{
         event.preventDefault();
         const fData = new FormData();
         fData.append("image", image);
+        fData.append("s_id", s_id);
         fData.append("p_title", p_title);
         fData.append("p_brand", p_brand);
         fData.append("p_price", p_price);
         fData.append("Category", Category);
         fData.append("p_description", p_description);
         fData.append("p_quantity", p_quantity);
-        //var data = { p_title:p_title,p_brand:p_brand, p_price:p_price, Category:Category, p_description:p_description, p_quantity:p_quantity, image:image};
-        console.log(fData)
+
         axiosConfig.post("/seller/post",fData)
         .then((rsp)=>{
             if (rsp.data.status === 200) {
                 navigate('/seller/dashboard');
                 swal('Success', rsp.data.msg, 'success')
-              } else if (rsp.data.status === 422) {
+            } else if (rsp.data.status === 422) {
                 setErr(rsp.data.errors)
                 setButtonText(initialText);
-              }
+            }
         })
     }
 
     return (
+        <div><NavBar></NavBar>
         <section className="vh-200">
         <div className="container py-5 h-200">
             <div className="row d-flex justify-content-center align-items-center h-200">
@@ -110,7 +111,7 @@ const PostProduct=()=> {
 
                         <label>Photo</label>
                         <input type="file" name="image" className="form-control mb-2"
-                            onChange={e=>handleChange(e.target.files)}
+                            onChange = {(e)=>{setImage(e.target.files[0])}}
                         />
                         <p className="text-danger">{err.image? err.image[0]:''}</p>
 
@@ -125,7 +126,7 @@ const PostProduct=()=> {
         </div>
        
         </section>
-
+        </div>
     )
 }
 

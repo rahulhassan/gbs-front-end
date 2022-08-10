@@ -1,22 +1,30 @@
 import {useState,useEffect} from 'react';
+import { Link } from 'react-router-dom';
 import axiosConfig from '../axiosConfig';
+import NavBar from './NavBar/NavBar';
 const SellerProfile=()=>{
     const [loading, setLoading] =useState(true);
     const [profile ,setProfile] = useState({});
     useEffect(()=>{
-        axiosConfig.get(`/seller/profile/1`).then((res)=>{
+        axiosConfig.get(`/seller/profile/${localStorage.getItem("user_id")}`).then((res)=>{
             setProfile(res.data);
-            console.log(res.data);
             setLoading(false);
         });
     },[]);
 
     if(loading){
-        return (<h4>Loading...</h4>)
+        return (
+            <div>
+                <NavBar/>
+                <h4>Loading...</h4>
+            </div>
+        )
     }
 
    
     return(
+        <div>
+        <NavBar/>
         <section className="vh-100" style={{backgroundColor: "#f4f5f7"}}>
             <div className="container py-5 h-100">
                 <div className="row d-flex justify-content-center align-items-center h-100">
@@ -24,7 +32,7 @@ const SellerProfile=()=>{
                     <div className="card mb-3" style={{borderRadius: ".5rem"}}>
                     <div className="row g-0">
                         <div className="col-md-4 text-center text-white" style={{borderTopLeftRadius: ".5rem", borderBottomLeftRadius: ".5rem", backgroundColor:"rgba(253, 160, 133, 1)"}}>
-                        <img src={`http://127.0.0.1:8000/images/${profile.s_image}`} alt="Avatar" className="img-fluid my-5" style={{width: "200px", borderRadius: "50%"}} />
+                        <img src={`http://127.0.0.1:8000/images/seller/${profile.s_image}`} alt="Avatar" className="img-fluid my-5" style={{width: "200px", borderRadius: "50%"}} />
                         <h5>{profile.s_name}</h5>
                         <p style={{marginBottom:"80px"}}>Best Seller</p>
                         </div>
@@ -47,7 +55,7 @@ const SellerProfile=()=>{
                             <br></br>
                             <br></br>
                             <br></br>
-                            <button type="button" className="btn btn-success">Edit</button>
+                            <Link to={`/seller/edit/${profile.s_id}`} className="btn btn-warning">Edit</Link>
                         </div>
                         </div>
                     </div>
@@ -56,6 +64,7 @@ const SellerProfile=()=>{
                 </div>
             </div>
         </section>
+        </div>
     )
 }
 export default SellerProfile;
