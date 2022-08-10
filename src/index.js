@@ -6,8 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 import Main from './Components/Buyer/Main/Main';
 
-import RouteLink from './Components/Seller/NavBar/RouteLink';
-import Login from './Components/Login';
+import MainRoute from './Components/MainRoute';
 
 
 
@@ -15,9 +14,10 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
 
-   <Main></Main>
+   {/* <Main></Main> */}
 
    {/* <RouteLink></RouteLink> */}
+   <MainRoute></MainRoute>
 
   </React.StrictMode>
 );
