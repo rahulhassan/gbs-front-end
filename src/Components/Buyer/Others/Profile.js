@@ -64,7 +64,7 @@ const Profile=()=>{
                                             {/* <td><b>{{$buyer->b_add}}</b></td> */}
                                         </tr>
                                     </table>
-                                    {/* <a href="{{route('buyer.other.updateProfile')}}"><button type="button" class="btn btn-success">Update Profile</button></a> */}
+                                   <Link to={"/updateProfile"}><button type="button" class="btn btn-success">Update Profile</button></Link>
 
                                 </div>
                     

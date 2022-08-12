@@ -4,6 +4,7 @@ import axiosConfig from '../../axiosConfig';
 
 const Cart=()=>{
 
+    const {id} = useParams();
     const [products,setProducts] = useState([]);
 
     useEffect(()=>{
@@ -49,6 +50,7 @@ const Cart=()=>{
                                 
 
                             </div>
+
                             <div class="col-sm-10">
                         
                                     <table className="table  table-striped bg-dark text-white" >
@@ -65,8 +67,9 @@ const Cart=()=>{
                                            
                                                     <tr key={cart.p_title}>
                                                     <td>
-                                                            <img src={`http://localhost:8000/images/${cart.product.image_path}`}  height="80px" width="80px" alt=""></img>
-                                                           {cart.product.p_title}
+                                                            <img src={`http://localhost:8000/images/${cart.image_path}`}  height="80px" width="80px" alt=""></img>
+                                                           {/* {cart.product.p_title} */}
+                                                           {cart.p_title}
                                                     </td>
                                                     
                                             
@@ -79,11 +82,11 @@ const Cart=()=>{
                                                         <td>
                                                         
                                                                                             
-                                                                    <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                                                    <div className="col-md-3 col-lg-3 col-xl-2 d-flex">
                                                         
                                                                         
                                                                         
-                                                                            <button class="btn btn-link px-2"
+                                                                            <button className="btn btn-link px-2"
                                                                             onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                                                                             <i class="fas fa-minus"></i>
                                                                             </button>
@@ -93,15 +96,15 @@ const Cart=()=>{
                                                                             </button>
                                                                                     
                                                                             {/* <form action="{{url('cart/quantity/update/'.$c->c_id)}}" method="post"> */}
-                                                                            {/* @csrf */}
+                                                                             {/* @csrf */}
                                                                             
                                                                                     <input id="form1" min="1" name="quantity" style={{width:"50px"}} value={cart.p_quantity} type="number"
-                                                                                    class="form-control form-control-sm" />
+                                                                                    class="form-control form-control-sm" /> 
 
                                                                                     
                                                                         
 
-                                                                        </div>       
+                                                                    </div>       
                                                             
                                                         </td>
                                                         <td>
@@ -177,7 +180,7 @@ const Cart=()=>{
                                     </div> */}
 
 
-                                    <div class="cart_total" style={{float:"right"}}>
+                                    <div className="cart_total" style={{float:"right"}}>
 
                                                 <table class="table  table-striped bg-dark text-white" style={{width:"300px"}}>
                                                     <tr>

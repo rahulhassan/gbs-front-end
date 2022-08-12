@@ -101,12 +101,13 @@ const Orders=()=>{
                     </div>
                     <div class="col-sm-6">
                     <table className="table table-striped bg-dark text-light">
-                                <th></th>
+                        <tr>
+                        <th></th>
                         <th>Product Name</th>
                         <th>Product Quantity</th>
                         <th>Price</th>
                         <th>Status</th>
-                        
+                        </tr>
                             {
                                
                                 orders.map((order)=>(
