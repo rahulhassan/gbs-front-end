@@ -1,6 +1,23 @@
-import { Link } from "react-router-dom";
+import axiosConfig from '../../axiosConfig';
+import {Link, useParams} from 'react-router-dom';
+import {useState,useEffect} from 'react';
+import swal from 'sweetalert';
+import axios from 'axios';
 
 const Checkout=()=>{
+    const {id} = useParams();
+    const [products,setProducts] = useState([]);
+
+    useEffect(()=>{
+        axiosConfig.get("/productDetails/cart/checkout/orderDetails")
+        .then((rsp)=>{
+            setProducts(rsp.data);
+            console.log(rsp);
+        },(err)=>{
+
+        }) 
+    },[]);
+
     return(
         <div>
             
@@ -47,7 +64,8 @@ const Checkout=()=>{
                                                         <td></td>
                                                         <td></td>
                                                     </tr>
-                                                    {/* @foreach($carts as $c) */}
+                                                    {
+                                                          products.map((order)=>(
                                                     <tr>
                                                         <td> 
                                                             {/* {{$c->product->p_title}}({{$c->p_quantity}}) */}
@@ -58,7 +76,8 @@ const Checkout=()=>{
                                                             {/* {{$c->p_price * $c->p_quantity}} */}
                                                         </td>
                                                     </tr>
-                                                    {/* @endforeach */}
+                                                          ))
+                                                    }
                                                     <tr>
                                                         <td></td>
                                                         <td></td>
