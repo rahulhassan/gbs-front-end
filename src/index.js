@@ -4,9 +4,10 @@ import './index.css';
 //import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import Main from './Components/Buyer/Main/Main';
+import Routes from './Components/Admin/Bar/Routes';
 
-import MainRoute from './Components/MainRoute';
+// import MainRoute from './Components/MainRoute';
+// import { Route } from 'react-router-dom';
 
 
 
@@ -14,10 +15,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
 
-   {/* <Main></Main> */}
-
-   {/* <RouteLink></RouteLink> */}
-   <MainRoute></MainRoute>
+    {/* <MainRoute></MainRoute> */}
+    <Routes></Routes>
 
   </React.StrictMode>
 );

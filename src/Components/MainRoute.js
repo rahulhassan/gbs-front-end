@@ -24,6 +24,7 @@ const MainRoute=()=>{
         <div>
             <BrowserRouter>
                 <Routes>
+                    
                     <Route path="/signup" element={<SignupUser/>}></Route>
                     <Route path="/signin" element={<Login/>}></Route>
                     <Route path="/signout" element={<Logout/>}></Route>
@@ -53,7 +54,9 @@ const MainRoute=()=>{
                     <Route path="/productDetails/cart/checkout/orderDetails" element={<Checkout></Checkout>}> </Route>
                     <Route path="/orders" element={<Orders></Orders>}> </Route>
 
+
 {/* ----------------------------------------------------------------------------------------------------------- */}
+
 
                 </Routes>
             </BrowserRouter>
