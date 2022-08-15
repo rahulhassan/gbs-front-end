@@ -28,7 +28,29 @@ const Login =()=>{
                     localStorage.setItem("user_name", rsp.data[0].seller.s_name);
                     navigate('/seller/dashboard');
                 })
+            }else if(rsp.data.user === "buyer"){
+                axiosConfig.get(`/seller/info/${localStorage.getItem("_authToken")}`)
+                .then((rsp)=>{
+                    localStorage.setItem("user_id", rsp.data[0].buyer.b_id);
+                    localStorage.setItem("user_name", rsp.data[0].buyer.b_name);
+                    //navigate('/seller/dashboard');
+                })
+            }else if(rsp.data.user === "employee"){
+                axiosConfig.get(`/seller/info/${localStorage.getItem("_authToken")}`)
+                .then((rsp)=>{
+                    localStorage.setItem("user_id", rsp.data[0].employee.e_id);
+                    localStorage.setItem("user_name", rsp.data[0].employee.e_name);
+                    //navigate('/seller/dashboard');
+                })
+            }else if(rsp.data.user === "admin"){
+                axiosConfig.get(`/seller/info/${localStorage.getItem("_authToken")}`)
+                .then((rsp)=>{
+                    localStorage.setItem("user_id", rsp.data[0].admin.a_id);
+                    localStorage.setItem("user_name", rsp.data[0].admin.a_name);
+                    //navigate('/seller/dashboard');
+                })
             }
+
             login.className = "btn btn-primary btn-block mb-4";
             login.innerHTML= "Sign Up";
         });
