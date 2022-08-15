@@ -13,6 +13,7 @@ const MainRoute=()=>{
         <div>
             <BrowserRouter>
                 <Routes>
+                    
                     <Route path="/signup" element={<SignupUser/>}></Route>
                     <Route path="/signin" element={<Login/>}></Route>
                     <Route path="/signout" element={<Logout/>}></Route>
@@ -30,7 +31,6 @@ const MainRoute=()=>{
 
 
 {/* -------------------------------------------------------------------------------------*/}
-
 
 
 
