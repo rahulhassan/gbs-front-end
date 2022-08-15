@@ -1,4 +1,4 @@
-
+import TopMenu from '../Main/TopMenu';
 import axiosConfig from '../../axiosConfig';
 import {Link} from 'react-router-dom';
 import {useState,useEffect} from 'react';
@@ -17,12 +17,26 @@ const Profile=()=>{
         }) 
     },[]);
 
+    //_________________________________________________________________________________________________
+
+
     return(
         <div>
+
+            <TopMenu/>
 
                 <hr/>
                 <h4 style={{textAlign:"center",fontFamily: "myFirstFont"}}>Profile</h4>
                 <hr/>
+
+
+                    <div class="alert alert-success" role="alert">
+                                        {/* <b>{msg}</b> */}
+                                        
+                         </div>
+
+
+
                 <div>
                     <div class="container" style={{padding: "30px 0"}}>
                         <div class="row">

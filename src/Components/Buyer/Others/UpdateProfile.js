@@ -1,3 +1,4 @@
+import TopMenu from '../Main/TopMenu';
 import axiosConfig from '../../axiosConfig';
 import {Link} from 'react-router-dom';
 import {useState,useEffect} from 'react';
@@ -25,6 +26,7 @@ const UpdateProfile=()=>{
         }) 
     },[]);
 
+    
     const navigate = useNavigate();
     const[b_image,setImage] = useState("");
     const[b_name,setName] = useState("");
@@ -33,7 +35,7 @@ const UpdateProfile=()=>{
     const[b_add,setAddress] = useState("");
     const[msg,setMsg]=useState("");
 
-   
+   //________________________________________________________________________________________________
 
     const[err,setErr] = useState("");
 
@@ -81,7 +83,7 @@ const UpdateProfile=()=>{
 
 
 
-
+//_______________________________________________________________________________________________
 
 
     // const handleForm=(event)=>{
@@ -113,12 +115,13 @@ const UpdateProfile=()=>{
     // })
     // }
 
-
+//_____________________________________________________________________________________________________
 
 
     return(
         <div>
             
+            <TopMenu/>
                                 
                     <hr/>
                     <h4 style={{textAlign:"center",fontFamily: "myFirstFont"}}>Update Profile</h4>
