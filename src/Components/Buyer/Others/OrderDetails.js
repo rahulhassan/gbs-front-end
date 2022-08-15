@@ -1,3 +1,4 @@
+import TopMenu from '../Main/TopMenu';
 import {Link, useParams} from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import axiosConfig from '../../axiosConfig';
@@ -18,7 +19,9 @@ const OrderDetails=()=>{
         }) 
     },[]);
 
-   
+   //_____________________________________________________________________________
+
+
     const[b_name,setName]=useState("");
     const[b_phn,setPhone]=useState("");
     const[b_add,setAddress]=useState("");
@@ -48,11 +51,13 @@ const OrderDetails=()=>{
         })
     }
 
-
+//_______________________________________________________________________________________
 
     return(
 
         <div>
+
+        <TopMenu/>
 
             <hr/>
             <h4 style={{textAlign:"center",fontFamily: "myFirstFont"}}>Order Overview</h4>
@@ -96,8 +101,8 @@ const OrderDetails=()=>{
                                         <td><b>Phone</b></td>
                                         <td><b>:</b></td>
                                         <td>
-                                        <input type="text" name="b_phn" value={b_phn} onChange={(e)=>{setPhone(e.target.value)}}></input><br></br>
-                                        <span>{err.b_phn? err.b_phn[0]:''}</span>
+                                                <input type="text" name="b_phn" value={b_phn} onChange={(e)=>{setPhone(e.target.value)}}></input><br></br>
+                                                <span>{err.b_phn? err.b_phn[0]:''}</span>
                                         </td>
                                     </tr>
 
@@ -126,7 +131,7 @@ const OrderDetails=()=>{
                                                     <tr>
                                                             <td>
                                                                     <div class="input-radio">
-                                                                    <input type="radio" name="payment_type" value="Cash" onChange={(e)=>{setPayment(e.target.value)}}></input>
+                                                                        <input type="radio" name="payment_type" value="Cash" onChange={(e)=>{setPayment(e.target.value)}}></input>
                                                                             
                                                                             <label for="payment-1">
                                                                                     <span></span>
@@ -193,8 +198,8 @@ const OrderDetails=()=>{
                                             <span>{err.payment_type? err.payment_type[0]:''}</span>
                                                     
                                     </div>
-</div>
-<button type="Submit" class="btn btn-success" >PLACE ORDER</button>
+                                </div>
+                                <button type="Submit" class="btn btn-success" >PLACE ORDER</button>
                     </div>
                     
                    

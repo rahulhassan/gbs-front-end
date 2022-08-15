@@ -1,4 +1,4 @@
-
+import TopMenu from '../Main/TopMenu';
 import axiosConfig from '../../axiosConfig';
 import {Link, useParams} from 'react-router-dom';
 import {useState,useEffect} from 'react';
@@ -21,7 +21,7 @@ const Orders=()=>{
         }) 
     },[]);
     
-
+//__________________________________________________________________________________________
 
     // const DeleteOrder=()=>{
     //     axiosConfig.post(`/my_orders/delete/${id}`)
@@ -67,6 +67,8 @@ const Orders=()=>{
 
         }
 
+        //___________________________________________________________
+
     function deleteOrder(id)
     {
         fetch(`/my_orders/delete/${id}`,{
@@ -80,26 +82,30 @@ const Orders=()=>{
         })
         alert(id)
     }
+
+//_________________________________________________________________________________________________
+
     return(
         <div>
 
+        <TopMenu/>
 
             <hr/>
             <h4 style={{textAlign:"center",fontFamily: "myFirstFont"}}>My Order List</h4>
             <hr/> 
 
-            <div class="alert alert-warning" role="alert">
+            <div class="alert alert-success" role="alert">
                     {/* <b>{orderDeleted}</b> */}
             </div>
 
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-3 ">
+                    <div class="col-sm-2">
                 
                     
 
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-8">
                     <table className="table table-striped bg-dark text-light">
                         <tr>
                         <th></th>
@@ -136,7 +142,7 @@ const Orders=()=>{
                        </table>
 
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                     
                     
 

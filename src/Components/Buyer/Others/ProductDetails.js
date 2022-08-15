@@ -1,3 +1,4 @@
+import TopMenu from '../Main/TopMenu';
 import {Link, useParams} from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import axiosConfig from '../../axiosConfig';
@@ -5,28 +6,32 @@ import axiosConfig from '../../axiosConfig';
 const ProductDetails=()=>{
     const {title} = useParams();
     const [product,setProduct] = useState({});
+    const [total,setTotal] = useState("");
+    const [quantity,setQuantity] = useState("");
 
     useEffect(()=>{
         axiosConfig.get(`/productDetails/${title}`)
         .then((rsp)=>{
-            setProduct(rsp.data);
-            setProductId(rsp.data.p_id);
-            setProductPrice(rsp.data.p_price);
-            setSellerId(rsp.data.s_id);
-
+            setProduct(rsp.data.products);
+            setProductId(rsp.data.products.p_id);
+            setProductPrice(rsp.data.products.p_price);
+            setSellerId(rsp.data.products.s_id);
+            setTotal(rsp.data.total);
+            setQuantity(rsp.data.quantity);
             console.log(rsp);
         },(err)=>{
 
         }) 
     },[]);
 
-
+//__________________________________________________________________________________________
     
     const[p_id,setProductId]=useState("");
     const[p_price,setProductPrice]=useState("");
     const[s_id,setSellerId]=useState("");
     const[msg,setMsg]=useState("");
     const[err,setErr]=useState("");
+
 
     const handleForm=(event)=>
     {
@@ -50,21 +55,25 @@ const ProductDetails=()=>{
         })
     }
 
+//________________________________________________________________________________________________
+
 
     return(
         <div>
            
+           <TopMenu/>
+
                     <hr/>
                     <h4 style={{textAlign:"center",fontFamily: "myFirstFont"}}>{product.p_title} </h4>
                     <hr/>
                 
-                    <div class="alert alert-warning" role="alert">
+                    <div class="alert alert-success" role="alert">
                     <b>{msg}</b>
                     </div>
 
-                    <div class="alert alert-dark" role="alert" style={{float:"right",marginRight:"70px"}}>
-                    <span><b>Total: </b> </span> 
-                    <span style={{marginRight:"10px"}}><b>Quantity: </b> </span> 
+                    <div class="alert alert-dark" role="alert" style={{float:"right",marginRight:"120px"}}>
+                    <span><b>Total: {total}</b> </span> 
+                    <span style={{marginRight:"10px"}}><b>Quantity: {quantity}</b> </span> 
                     <span><Link to={"/cart"} style={{textDecoration:"none"}}><b>Cart <i class="fa fa-shopping-cart" style={{fontSize:"48px"}}></i></b></Link></span>
                     </div>
                     <br/><br/><br/>
