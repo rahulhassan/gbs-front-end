@@ -11,7 +11,7 @@ const Profile=()=>{
     const [admin,setAdmin] = useState({});
     const navigate = useNavigate();
     const[a_image,setImage] = useState("");
-    const[imageses,setInputImage] = useState("");
+    const[imageses,setInputImage] = useState({});
 
 
     useEffect(()=>{
@@ -34,19 +34,20 @@ const Profile=()=>{
         thisClicked.innerText = "Updating";
 
         axios.post("http://localhost:8000/api/admin/files/upload", fData)
-                .then((rsp)=>{
-                   navigate('/Admin/Profile');
-                    
-                })
+        .then((rsp)=>{
+            navigate('/Admin/Profile');
+            thisClicked.innerText = "Update";
+            
+        })
                 
     }
 
     return(
         <div>
-            {<img src={`http://localhost:8000/storage/images/${admin.a_image}`} width="300px" height="300px" alt=""></img> }
+            {<img src={`http://localhost:8000/images/${admin.a_image}`} width="300px" height="300px" alt=""></img> }
 
             <form>
-                <input type="file" name="a_image"  onChange={(e)=>{setInputImage(e.target.files[0])}} ></input><br></br>
+                <input type="file" name="image" onChange = {(e)=>{setInputImage(e.target.files[0])}}/> <br></br>
                 <button type="Submit" onClick={handleForm}>Upload</button>
             </form>
 
