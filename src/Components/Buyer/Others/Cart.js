@@ -188,9 +188,10 @@ const Cart=()=>{
         <div>
             <TopMenu/>
 
-                <hr/>
-                <h3 style={{textAlign:"center",fontFamily: "myFirstFont"}}>Shopping Cart </h3>
-                <hr/> 
+            <hr/>
+            <h4 style={{textAlign:"center",fontFamily: "myFirstFont"}}>Shopping Cart </h4>
+            <hr/> 
+
 
 
 
