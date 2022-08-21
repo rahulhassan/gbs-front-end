@@ -10,7 +10,6 @@ const Profile=()=>{
     // const[mfile,setFile] = useState(null);
     const [admin,setAdmin] = useState({});
     const navigate = useNavigate();
-    const[a_image,setImage] = useState("");
     const[imageses,setInputImage] = useState({});
 
 
@@ -18,7 +17,6 @@ const Profile=()=>{
         axios.get("http://localhost:8000/api/admin/files/profile")
         .then((rsp)=>{
             setAdmin(rsp.data);
-            setImage(rsp.data.a_image);
             console.log(rsp);
         },(err)=>{
 

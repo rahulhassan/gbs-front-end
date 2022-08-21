@@ -3,11 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 //import App from './App';
 import reportWebVitals from './reportWebVitals';
-
 import Routes from './Components/Admin/Bar/Routes';
-
 import MainRoute from './Components/MainRoute';
-// import { Route } from 'react-router-dom';
 
 
 
@@ -15,9 +12,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
 
-  {/* <main></main> */}
     <MainRoute></MainRoute>
-    {/* <Routes></Routes> */}
 
   </React.StrictMode>
 );
