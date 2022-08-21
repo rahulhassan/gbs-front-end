@@ -1,11 +1,9 @@
 import "./CSS/adminDashboard.css";
-import EditAdmin from "./EditAdmin";
-import EditPic from "./EditPic";
+import {useState, useEffect} from 'react';
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const Profile=()=>{
-
-
-    // const[mfile,setFile] = useState(null);
+const EditPic=()=>{
     const [admin,setAdmin] = useState({});
     const navigate = useNavigate();
     const[imageses,setInputImage] = useState({});
@@ -15,6 +13,7 @@ const Profile=()=>{
         axios.get("http://localhost:8000/api/admin/files/profile")
         .then((rsp)=>{
             setAdmin(rsp.data);
+            setInputImage(rsp.data.a_image);
             console.log(rsp);
         },(err)=>{
 
@@ -31,20 +30,28 @@ const Profile=()=>{
 
         axios.post("http://localhost:8000/api/admin/files/upload", fData)
         .then((rsp)=>{
-            navigate('/Admin/Profile');
             thisClicked.innerText = "Update";
+            navigate('/Admin/Profile');
             
         })
                 
     }
 
-
     return(
-        <div>   
-            <div class="ad-btn2"><a href="/Admin/Dashboard">GO BACK!</a></div>                             
-            <EditPic />
-            <EditAdmin />
+        <div>
+
+            <div class="ad-img">
+                {<img src={`http://localhost:8000/images/${admin.a_image}`} width="300px" height="300px" alt=""></img> } <br />
+            
+
+                <form>
+                    <input type="file" name="image" onChange = {(e)=>{setInputImage(e.target.files[0])}} /> <br></br>
+                    <button type="Submit" onClick={handleForm}>Upload</button>
+                </form>
+            </div>
+
+
         </div>
     )
 }
-export default Profile;
+export default EditPic;

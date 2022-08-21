@@ -47,9 +47,9 @@ const CreateEmployee =()=>{
     return (
         <div>
             <LeftBar />
-            <div class="container">
-                <div class="content">
-                    <div class="content-3">
+            <div class="ad-container">
+                <div class="ad-content">
+                    <div class="ad-content-3">
                         <h1>CREATE A NEW EMPLOYEE</h1>
                              
                         <form action="" method="POST" onSubmit={handleForm}>
@@ -71,6 +71,8 @@ const CreateEmployee =()=>{
                           <input type="text" name="e_add" id="add" value={e_add} onChange={(e)=>{setAdd(e.target.value)}} /><span>{err.e_add? err.e_add[0]:''}</span><br/>
                           
                           <button>ADD</button>
+                          <div class="ad-btn2"><a href="/Admin/Employee">CANCEL</a></div>
+
                         </form>
                 
                             

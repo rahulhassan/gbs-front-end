@@ -47,9 +47,9 @@ const CreateSeller =()=>{
     return (
         <div>
             <LeftBar />
-            <div class="container">
-                <div class="content">
-                    <div class="content-3">
+            <div class="ad-container">
+                <div class="ad-content">
+                    <div class="ad-content-3">
                         <h1>CREATE A NEW SELLER</h1>
                              
                         <form action="" method="POST" onSubmit={handleForm}>
@@ -72,6 +72,7 @@ const CreateSeller =()=>{
                           <input type="text" name="s_add" id="add" value={s_add} onChange={(e)=>{setAdd(e.target.value)}} /><span>{err.s_add? err.s_add[0]:''}</span><br/>
                           
                           <button>ADD</button>
+                          <div class="ad-btn2"><a href="/Admin/Seller">CANCEL</a></div>
                         </form>
                 
                             

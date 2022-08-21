@@ -47,9 +47,9 @@ const CreateBuyer =()=>{
     return (
         <div>
             <LeftBar />
-            <div class="container">
-                <div class="content">
-                    <div class="content-3">
+            <div class="ad-container">
+                <div class="ad-content">
+                    <div class="ad-content-3">
                         <h1>CREATE A NEW BUYER</h1>
                              
                         <form action="" method="POST" onSubmit={handleForm}>
@@ -71,6 +71,7 @@ const CreateBuyer =()=>{
                           <input type="text" name="b_add" id="add" value={b_add} onChange={(e)=>{setAdd(e.target.value)}} /><span>{err.b_add? err.b_add[0]:''}</span><br/>
                           
                           <button>ADD</button>
+                          <div class="ad-btn2"><a href="/Admin/Buyer">CANCEL</a></div>
                         </form>
                 
                             

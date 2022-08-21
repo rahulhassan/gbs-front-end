@@ -25,8 +25,8 @@ const RouteLink=()=>{
     return (
         <div>
             <BrowserRouter>
-                {/* <LeftBar/>
-                <TopBar/> */}
+                {/* <LeftBar/> */}
+                {/* <TopBar/> */}
                 <Routes>
                     <Route path="/" element={<Dashboard/>}></Route>
                     <Route path="/Admin/Dashboard" element={<Dashboard/>}></Route>

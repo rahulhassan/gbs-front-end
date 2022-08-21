@@ -3,8 +3,8 @@ import "../CSS/adminDashboard.css";
 
 const LeftBar=()=>{
     return (
-        <div class="side-menu">
-            <div class="brand-name">
+        <div class="ad-side-menu">
+            <div class="ad-brand-name">
                 <h1>GBS</h1>
             </div>
             <ul>
