@@ -84,7 +84,7 @@ const ProductsList=()=>{
                                                 <td><b>Price:</b> {p.p_price}</td>
                                             </tr>
                                             <tr>
-                                                <td colSpan={2}>Description: {p.p_description}</td>
+                                                <td colSpan={2}><b>Description:</b> {p.p_description}</td>
                                             </tr>
                                             <tr>
                                                 <td>
