@@ -20,7 +20,7 @@ const Checkout=()=>{
    
  
     useEffect(()=>{
-        axiosConfig.get("/productDetails/cart/checkout/orderDetails")
+        axiosConfig.get(`/productDetails/cart/checkout/orderDetails/${localStorage.getItem("user_id")}`)
         .then((rsp)=>{
             setProducts(rsp.data.cart);
             setSubTotal(rsp.data.sub_total);
@@ -61,9 +61,13 @@ const Checkout=()=>{
     {
         event.preventDefault();
         var data={b_name:b_name,b_phn:b_phn,b_add:b_add,payment_type:payment_type,sub_total:sub_total,discount:discount,total:total}
-        axiosConfig.post("/placeOrder",data)
+        axiosConfig.post(`/placeOrder/${localStorage.getItem("user_id")}`,data)
         .then((rsp)=>{
             setMsg(rsp.data.msg);
+            if(rsp.data.msg)
+            {
+                swal("Success",rsp.data.msg,"success");
+            }
             setErr(rsp.data);
             setCoupon(localStorage.removeItem('cpn'));
             setDiscount(localStorage.removeItem('dis'));
@@ -84,14 +88,15 @@ const Checkout=()=>{
 //______________________________________________________________________________________________
 
 
-    const[message,setMessage]=useState("");
+    //const[message,setMessage]=useState("");
     const deleteCoupon=(event)=>{
         event.preventDefault();
         axiosConfig.post("/coupon/destroy")
         .then((rsp)=>{
             localStorage.removeItem('cpn');
             localStorage.removeItem('dis');
-            setMessage("Coupon has been removed");
+            //setMessage("Coupon has been removed");
+            swal("Success", "Coupon has been removed but you have to reload !", "success");
             //setMsg(rsp.data.msg);
         
             
@@ -113,35 +118,21 @@ const Checkout=()=>{
                     <h4 style={{textAlign:"center",fontFamily: "myFirstFont"}}>Order Overview</h4>
                     <hr/>
 
-                    {/* @if(session('orderPlaced'))
-                            <div class="alert alert-warning" role="alert">
-                                <b>{{session('orderPlaced')}}</b>
-                                
-                            </div>
-                    @endif
+                 
+
+                        {/* <div class="alert alert-success" role="alert">
+                                <b>{msg}</b>
+                        </div> */}
 
 
-
-                            @error('total')
-                            <div class="alert alert-danger" role="alert">
-                                <b>{{$message}}</b>
-                            </div>
-                            @enderror */}
-                        
-
-
-
-                        <div class="alert alert-danger" role="alert">
+                        <div class="alert alert-success text-center text-danger" role="alert">
                             <span>{err.total? err.total[0]:''}</span>
                         </div>
 
-                        <div class="alert alert-success" role="alert">
-                                <b>{msg}</b>
-                        </div>
-
-                        <div class="alert alert-danger" role="alert">
+                       
+                        {/* <div class="alert alert-danger" role="alert">
                             <span>{message}</span>
-                        </div>
+                        </div> */}
 
 
 
