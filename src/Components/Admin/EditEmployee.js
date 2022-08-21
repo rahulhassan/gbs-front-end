@@ -1,6 +1,6 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from 'axios';
 import LeftBar from "./Bar/LeftBar";
 
 
@@ -59,10 +59,12 @@ const EditEmployee=(props)=> {
 
         <div>
              <LeftBar />
-             <div class="container">
-                 <div class="content">
-                     <div class="content-3">
-                         <h1>UPDATE EMPLOYEE</h1>                           
+             <div class="ad-container">
+                 <div class="ad-content">
+                     <div class="ad-content-3">
+                         <h1>UPDATE EMPLOYEE</h1>  
+                         <h1>{msg}</h1>          
+                         <form>               
                            <label>EMPLOYEE ID</label><br/>
                            <input readOnly name="e_id" id="id" value={inputs.e_id || '' } onChange={handleChange} /><br/>
                            <label>EMPLOYEE NAME</label><br/>
@@ -76,7 +78,8 @@ const EditEmployee=(props)=> {
                            <label>ADDRESS</label><br/>
                            <input type="text" name="e_add" id="add" value={inputs.e_add || '' } onChange={handleChange} /><span>{err.e_add? err.e_add[0]:''}</span><br/>                        
                            <button type="button" onClick={submitForm}>UPDATE</button>      
-                           <a href="/Admin/Employee">CANCEL</a>                                  
+                           <div class="ad-btn2"><a href="/Admin/Employee">CANCEL</a></div> 
+                        </form>                                
                      </div>
                  </div>
              </div>
