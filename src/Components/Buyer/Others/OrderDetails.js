@@ -1,6 +1,8 @@
+import TopMenu from '../Main/TopMenu';
 import {Link, useParams} from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import axiosConfig from '../../axiosConfig';
+import swal from 'sweetalert';
 
 
 const OrderDetails=()=>{
@@ -18,7 +20,9 @@ const OrderDetails=()=>{
         }) 
     },[]);
 
-   
+   //_____________________________________________________________________________
+
+
     const[b_name,setName]=useState("");
     const[b_phn,setPhone]=useState("");
     const[b_add,setAddress]=useState("");
@@ -30,9 +34,13 @@ const OrderDetails=()=>{
     {
         event.preventDefault();
         var data={b_name:b_name,b_phn:b_phn,b_add:b_add,payment_type:payment_type}
-        axiosConfig.post(`/placeOrder/${title}`,data)
+        axiosConfig.post(`/placeOrder/${localStorage.getItem("user_id")}/${title}`,data)
         .then((rsp)=>{
             setMsg(rsp.data.msg);
+            if(rsp.data.msg)
+            {
+                swal("Success",rsp.data.msg,"success");
+            }
             setErr(rsp.data);
             //debugger;
         },(er)=>{
@@ -48,11 +56,13 @@ const OrderDetails=()=>{
         })
     }
 
-
+//_______________________________________________________________________________________
 
     return(
 
         <div>
+
+        <TopMenu/>
 
             <hr/>
             <h4 style={{textAlign:"center",fontFamily: "myFirstFont"}}>Order Overview</h4>
@@ -60,7 +70,7 @@ const OrderDetails=()=>{
 
            
             <div class="alert alert-success" role="alert">
-                    <b>{msg}</b>
+                    {/* <b>{msg}</b> */}
             </div>
 
             <div class="container" style={{padding: "30px 0"}}>
@@ -96,8 +106,8 @@ const OrderDetails=()=>{
                                         <td><b>Phone</b></td>
                                         <td><b>:</b></td>
                                         <td>
-                                        <input type="text" name="b_phn" value={b_phn} onChange={(e)=>{setPhone(e.target.value)}}></input><br></br>
-                                        <span>{err.b_phn? err.b_phn[0]:''}</span>
+                                                <input type="text" name="b_phn" value={b_phn} onChange={(e)=>{setPhone(e.target.value)}}></input><br></br>
+                                                <span>{err.b_phn? err.b_phn[0]:''}</span>
                                         </td>
                                     </tr>
 
@@ -126,7 +136,7 @@ const OrderDetails=()=>{
                                                     <tr>
                                                             <td>
                                                                     <div class="input-radio">
-                                                                    <input type="radio" name="payment_type" value="Cash" onChange={(e)=>{setPayment(e.target.value)}}></input>
+                                                                        <input type="radio" name="payment_type" value="Cash" onChange={(e)=>{setPayment(e.target.value)}}></input>
                                                                             
                                                                             <label for="payment-1">
                                                                                     <span></span>
@@ -193,8 +203,8 @@ const OrderDetails=()=>{
                                             <span>{err.payment_type? err.payment_type[0]:''}</span>
                                                     
                                     </div>
-</div>
-<button type="Submit" class="btn btn-success" >PLACE ORDER</button>
+                                </div>
+                                <button type="Submit" class="btn btn-success" >PLACE ORDER</button>
                     </div>
                     
                    
