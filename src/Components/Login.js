@@ -33,7 +33,7 @@ const Login =()=>{
                 .then((rsp)=>{
                     localStorage.setItem("user_id", rsp.data[0].buyer.b_id);
                     localStorage.setItem("user_name", rsp.data[0].buyer.b_name);
-                    //navigate('/seller/dashboard');
+                    navigate('/dashboard');
                 })
             }else if(rsp.data.user === "employee"){
                 axiosConfig.get(`/seller/info/${localStorage.getItem("_authToken")}`)

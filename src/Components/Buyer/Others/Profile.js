@@ -1,4 +1,4 @@
-
+import TopMenu from '../Main/TopMenu';
 import axiosConfig from '../../axiosConfig';
 import {Link} from 'react-router-dom';
 import {useState,useEffect} from 'react';
@@ -8,7 +8,7 @@ const Profile=()=>{
     const [buyer,setBuyer] = useState({});
 
     useEffect(()=>{
-        axiosConfig.get("/profile")
+        axiosConfig.get(`/profile/${localStorage.getItem("user_id")}`)
         .then((rsp)=>{
             setBuyer(rsp.data);
             console.log(rsp);
@@ -17,18 +17,32 @@ const Profile=()=>{
         }) 
     },[]);
 
+    //_________________________________________________________________________________________________
+
+
     return(
         <div>
+
+            <TopMenu/>
 
                 <hr/>
                 <h4 style={{textAlign:"center",fontFamily: "myFirstFont"}}>Profile</h4>
                 <hr/>
+
+
+                    <div class="alert alert-success" role="alert">
+                                        {/* <b>{msg}</b> */}
+                                        
+                         </div>
+
+
+
                 <div>
                     <div class="container" style={{padding: "30px 0"}}>
                         <div class="row">
                                              
                                 <div class="col-sm-4 ">
-                                {buyer.b_image==null? <img src="http://localhost:8000/dummy/download.png" width="300px" alt=""></img>:
+                                {buyer.b_image==null? <img src="http://localhost:8000/dummy/download.png" width="300px" alt="" ></img>:
                                       <img src={`http://localhost:8000/buyerImages/${buyer.b_image}`} width="300px" height="300px" alt=""></img> }
                                         
                                     

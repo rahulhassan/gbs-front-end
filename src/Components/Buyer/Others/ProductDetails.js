@@ -1,26 +1,31 @@
+import TopMenu from '../Main/TopMenu';
 import {Link, useParams} from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import axiosConfig from '../../axiosConfig';
+import swal from 'sweetalert';
 
 const ProductDetails=()=>{
     const {title} = useParams();
     const [product,setProduct] = useState({});
+    const [total,setTotal] = useState("");
+    const [quantity,setQuantity] = useState("");
 
     useEffect(()=>{
-        axiosConfig.get(`/productDetails/${title}`)
+        axiosConfig.get(`/productDetails/${localStorage.getItem("user_id")}/${title}`)
         .then((rsp)=>{
-            setProduct(rsp.data);
-            setProductId(rsp.data.p_id);
-            setProductPrice(rsp.data.p_price);
-            setSellerId(rsp.data.s_id);
-
+            setProduct(rsp.data.products);
+            setProductId(rsp.data.products.p_id);
+            setProductPrice(rsp.data.products.p_price);
+            setSellerId(rsp.data.products.s_id);
+            setTotal(rsp.data.total);
+            setQuantity(rsp.data.quantity);
             console.log(rsp);
         },(err)=>{
 
         }) 
     },[]);
 
-
+//__________________________________________________________________________________________
     
     const[p_id,setProductId]=useState("");
     const[p_price,setProductPrice]=useState("");
@@ -28,14 +33,50 @@ const ProductDetails=()=>{
     const[msg,setMsg]=useState("");
     const[err,setErr]=useState("");
 
+
     const handleForm=(event)=>
     {
         event.preventDefault();
         var data={p_id:p_id,p_price:p_price,s_id:s_id}
-        axiosConfig.post("/cart",data)
+        axiosConfig.post(`/cart/${localStorage.getItem("user_id")}`,data)
         .then((rsp)=>{
             setMsg(rsp.data.msg);
             setErr(rsp.data);
+            if(rsp.data.msg)
+            {
+                swal("Success",rsp.data.msg,"success");
+            }
+            //debugger;
+        },(er)=>{
+            if(er.response.status==422)
+            {
+                setErr(err.response.data);
+            }
+            else
+            {
+                setMsg("Server Error Occured");
+            }
+            //debugger;
+        })
+    }
+
+//________________________________________________________________________________________________
+
+   
+  
+    const addToWishList=(event)=>
+    {
+        event.preventDefault();
+        var data={p_id:p_id}
+        axiosConfig.post(`/addToWishList/${localStorage.getItem("user_id")}`,data)
+        .then((rsp)=>{
+            setMsg(rsp.data.msg);
+            setErr(rsp.data);
+
+            if(rsp.data.msg)
+            {
+                swal("Success",rsp.data.msg,"success");
+            }
             //debugger;
         },(er)=>{
             if(er.response.status==422)
@@ -51,20 +92,24 @@ const ProductDetails=()=>{
     }
 
 
+//_____________________________________________________________________________________________________
+
     return(
         <div>
            
+           <TopMenu/>
+
                     <hr/>
                     <h4 style={{textAlign:"center",fontFamily: "myFirstFont"}}>{product.p_title} </h4>
                     <hr/>
                 
-                    <div class="alert alert-warning" role="alert">
-                    <b>{msg}</b>
+                    <div class="alert alert-success" role="alert">
+                    {/* <b>{msg}</b> */}
                     </div>
 
-                    <div class="alert alert-dark" role="alert" style={{float:"right",marginRight:"70px"}}>
-                    <span><b>Total: </b> </span> 
-                    <span style={{marginRight:"10px"}}><b>Quantity: </b> </span> 
+                    <div class="alert alert-dark" role="alert" style={{float:"right",marginRight:"120px"}}>
+                    <span><b>Total: {total}</b> </span> 
+                    <span style={{marginRight:"10px"}}><b>Quantity: {quantity}</b> </span> 
                     <span><Link to={"/cart"} style={{textDecoration:"none"}}><b>Cart <i class="fa fa-shopping-cart" style={{fontSize:"48px"}}></i></b></Link></span>
                     </div>
                     <br/><br/><br/>
@@ -115,7 +160,9 @@ const ProductDetails=()=>{
                                                     <span>{err.p_price? err.p_price[0]:''}</span>
                                                     <input type="hidden" name="s_id"     value={s_id}   onChange={(e)=>{setSellerId(e.target.value)}}></input><br></br>
                                                     <span>{err.s_id? err.s_id[0]:''}</span>
+                                                    <Link to={`/orderDetails/${product.p_title}`}><button type="button" class="btn btn-success" style={{marginRight:"20px",float:"left"}}>Buy Now</button></Link>
                                                     <button type="Submit" onClick={handleForm} class="btn btn-warning" style={{marginRight: "20px", float:"left"}}>Add to Cart</button> 
+                                                    <button type="Submit" onClick={addToWishList} class="btn btn-warning" style={{marginRight: "20px", float:"left"}}>Add to Wishlist</button> 
                                               
 {/* 
                                                     <input type="text" name="p_id"    onChange={(e)=>{setProductId(e.target.value)}}></input><br></br>
@@ -128,7 +175,7 @@ const ProductDetails=()=>{
                                                */}
 
                                                                
-                                                <Link to={`/orderDetails/${product.p_title}`}><button type="button" class="btn btn-success" style={{marginRight:"20px",float:"left"}}>Buy Now</button></Link>
+                                                {/* <Link to={`/orderDetails/${product.p_title}`}><button type="button" class="btn btn-success" style={{marginRight:"20px",float:"left"}}>Buy Now</button></Link> */}
 
 
                                                 <Link to={"/dashboard"}><button type="button" class="btn btn-info">Continue Shopping</button></Link>
