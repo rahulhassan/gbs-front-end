@@ -18,6 +18,7 @@ import UpdateProfile from './Buyer/Others/UpdateProfile';
 import Cart from './Buyer/Others/Cart';
 import Checkout from './Buyer/Others/Checkout';
 import Orders from './Buyer/Others/Orders';
+import Wishlist from './Buyer/Others/WishList';
 
 const MainRoute=()=>{
     return (
@@ -53,6 +54,7 @@ const MainRoute=()=>{
                     <Route path="/cart" element={<Cart></Cart>}> </Route>
                     <Route path="/productDetails/cart/checkout/orderDetails" element={<Checkout></Checkout>}> </Route>
                     <Route path="/orders" element={<Orders></Orders>}> </Route>
+                    <Route path="/wishlist" element={<Wishlist></Wishlist>}> </Route>
 
 
 {/* ----------------------------------------------------------------------------------------------------------- */}

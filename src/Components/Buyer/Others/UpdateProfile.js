@@ -11,7 +11,7 @@ const UpdateProfile=()=>{
     const [buyer,setBuyer] = useState({});
 
     useEffect(()=>{
-        axiosConfig.get("/updateProfile")
+        axiosConfig.get(`/updateProfile/${localStorage.getItem("user_id")}`)
         .then((rsp)=>{
             setBuyer(rsp.data);
             setImage(rsp.data.b_image);
@@ -62,7 +62,7 @@ const UpdateProfile=()=>{
                 // console.log(b_mail);
                 // console.log(b_phn);
                 // console.log(b_add);
-                axiosConfig.post("/updateProfile",fData)
+                axiosConfig.post(`/updateProfile/${localStorage.getItem("user_id")}`,fData)
                 .then((rsp)=>{
                     if (rsp.data.status === 200) {
                         //navigate('/seller/dashboard');

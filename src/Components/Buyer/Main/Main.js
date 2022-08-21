@@ -9,6 +9,7 @@ import UpdateProfile from "../Others/UpdateProfile";
 import OrderDetails from "../Others/OrderDetails";
 import OrderCompleted from "../Others/OrderCompleted";
 import Orders from "../Others/Orders";
+import Wishlist from "../Others/WishList";
 
 
 const Main=()=>{
@@ -29,6 +30,7 @@ const Main=()=>{
                     <Route path="/cart" element={<Cart></Cart>}> </Route>
                     <Route path="/productDetails/cart/checkout/orderDetails" element={<Checkout></Checkout>}> </Route>
                     <Route path="/orders" element={<Orders></Orders>}> </Route>
+                    <Route path="/wishlist" element={<Wishlist></Wishlist>}> </Route>
 
 
                     

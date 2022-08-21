@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 import Routes from './Components/Admin/Bar/Routes';
 
-// import MainRoute from './Components/MainRoute';
+import MainRoute from './Components/MainRoute';
 // import { Route } from 'react-router-dom';
 
 
@@ -15,8 +15,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
 
-    {/* <MainRoute></MainRoute> */}
-    <Routes></Routes>
+  {/* <main></main> */}
+    <MainRoute></MainRoute>
+    {/* <Routes></Routes> */}
 
   </React.StrictMode>
 );

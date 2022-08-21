@@ -2,6 +2,7 @@ import TopMenu from '../Main/TopMenu';
 import {Link, useParams} from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import axiosConfig from '../../axiosConfig';
+import swal from 'sweetalert';
 
 
 const OrderDetails=()=>{
@@ -33,9 +34,13 @@ const OrderDetails=()=>{
     {
         event.preventDefault();
         var data={b_name:b_name,b_phn:b_phn,b_add:b_add,payment_type:payment_type}
-        axiosConfig.post(`/placeOrder/${title}`,data)
+        axiosConfig.post(`/placeOrder/${localStorage.getItem("user_id")}/${title}`,data)
         .then((rsp)=>{
             setMsg(rsp.data.msg);
+            if(rsp.data.msg)
+            {
+                swal("Success",rsp.data.msg,"success");
+            }
             setErr(rsp.data);
             //debugger;
         },(er)=>{
@@ -65,7 +70,7 @@ const OrderDetails=()=>{
 
            
             <div class="alert alert-success" role="alert">
-                    <b>{msg}</b>
+                    {/* <b>{msg}</b> */}
             </div>
 
             <div class="container" style={{padding: "30px 0"}}>

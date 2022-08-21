@@ -2,6 +2,7 @@ import TopMenu from '../Main/TopMenu';
 import {Link, useParams} from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import axiosConfig from '../../axiosConfig';
+import swal from 'sweetalert';
 
 const ProductDetails=()=>{
     const {title} = useParams();
@@ -10,7 +11,7 @@ const ProductDetails=()=>{
     const [quantity,setQuantity] = useState("");
 
     useEffect(()=>{
-        axiosConfig.get(`/productDetails/${title}`)
+        axiosConfig.get(`/productDetails/${localStorage.getItem("user_id")}/${title}`)
         .then((rsp)=>{
             setProduct(rsp.data.products);
             setProductId(rsp.data.products.p_id);
@@ -37,10 +38,14 @@ const ProductDetails=()=>{
     {
         event.preventDefault();
         var data={p_id:p_id,p_price:p_price,s_id:s_id}
-        axiosConfig.post("/cart",data)
+        axiosConfig.post(`/cart/${localStorage.getItem("user_id")}`,data)
         .then((rsp)=>{
             setMsg(rsp.data.msg);
             setErr(rsp.data);
+            if(rsp.data.msg)
+            {
+                swal("Success",rsp.data.msg,"success");
+            }
             //debugger;
         },(er)=>{
             if(er.response.status==422)
@@ -57,6 +62,37 @@ const ProductDetails=()=>{
 
 //________________________________________________________________________________________________
 
+   
+  
+    const addToWishList=(event)=>
+    {
+        event.preventDefault();
+        var data={p_id:p_id}
+        axiosConfig.post(`/addToWishList/${localStorage.getItem("user_id")}`,data)
+        .then((rsp)=>{
+            setMsg(rsp.data.msg);
+            setErr(rsp.data);
+
+            if(rsp.data.msg)
+            {
+                swal("Success",rsp.data.msg,"success");
+            }
+            //debugger;
+        },(er)=>{
+            if(er.response.status==422)
+            {
+                setErr(err.response.data);
+            }
+            else
+            {
+                setMsg("Server Error Occured");
+            }
+            //debugger;
+        })
+    }
+
+
+//_____________________________________________________________________________________________________
 
     return(
         <div>
@@ -68,7 +104,7 @@ const ProductDetails=()=>{
                     <hr/>
                 
                     <div class="alert alert-success" role="alert">
-                    <b>{msg}</b>
+                    {/* <b>{msg}</b> */}
                     </div>
 
                     <div class="alert alert-dark" role="alert" style={{float:"right",marginRight:"120px"}}>
@@ -124,7 +160,9 @@ const ProductDetails=()=>{
                                                     <span>{err.p_price? err.p_price[0]:''}</span>
                                                     <input type="hidden" name="s_id"     value={s_id}   onChange={(e)=>{setSellerId(e.target.value)}}></input><br></br>
                                                     <span>{err.s_id? err.s_id[0]:''}</span>
+                                                    <Link to={`/orderDetails/${product.p_title}`}><button type="button" class="btn btn-success" style={{marginRight:"20px",float:"left"}}>Buy Now</button></Link>
                                                     <button type="Submit" onClick={handleForm} class="btn btn-warning" style={{marginRight: "20px", float:"left"}}>Add to Cart</button> 
+                                                    <button type="Submit" onClick={addToWishList} class="btn btn-warning" style={{marginRight: "20px", float:"left"}}>Add to Wishlist</button> 
                                               
 {/* 
                                                     <input type="text" name="p_id"    onChange={(e)=>{setProductId(e.target.value)}}></input><br></br>
@@ -137,7 +175,7 @@ const ProductDetails=()=>{
                                                */}
 
                                                                
-                                                <Link to={`/orderDetails/${product.p_title}`}><button type="button" class="btn btn-success" style={{marginRight:"20px",float:"left"}}>Buy Now</button></Link>
+                                                {/* <Link to={`/orderDetails/${product.p_title}`}><button type="button" class="btn btn-success" style={{marginRight:"20px",float:"left"}}>Buy Now</button></Link> */}
 
 
                                                 <Link to={"/dashboard"}><button type="button" class="btn btn-info">Continue Shopping</button></Link>

@@ -1,6 +1,7 @@
 import MenuItem from "./MenuItem";
 import {useState,useEffect} from 'react';
 import axiosConfig from '../../axiosConfig';
+import { Link } from "react-router-dom";
 
 const TopMenu=()=>{
 
@@ -17,7 +18,8 @@ const TopMenu=()=>{
                             <MenuItem url="/profile" title="Profile"/>
                             <MenuItem url="/updateProfile" title="Update Profile"/>
                             <MenuItem url="/orders" title="Orders"/>
-                            <MenuItem url="/logout" title="Logout"/>
+                            <MenuItem url="/wishlist" title="Wishlist"/>
+                            <Link to="/signout" style={{marginLeft:"20px"}}><button type="button" className="btn btn-outline-primary">Sign Out</button></Link>
                         </div>
                 
            
