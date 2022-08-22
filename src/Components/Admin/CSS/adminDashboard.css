@@ -32,6 +32,23 @@
         border-radius: 10px;
         text-align: center;
     }
+    .ad-piechart {
+        margin-top: 80px;
+        margin-left: 100px;
+        margin-bottom: 10px;
+    }
+    .ad-piechart p {
+        margin-left: 200px;
+        font-size: 20px;
+        font-weight: 500;
+        color: #f05462;
+    }
+    .ad-piechart h3 {
+        margin-left: 200px;
+        color: #f05462;
+        font-weight: 700;
+
+    }
     .ad-btn a {
         text-decoration: none;
         color: #000;
@@ -65,7 +82,25 @@
         border: 2px solid #f05462;
         border-radius: 0px;
     }
+    .ad-btn3 {
+        background: #f05462;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 10px;
+        text-align: center;
+    }
+    .ad-btn3 a {
+        text-decoration: none;
+        color: #000;
+    }
     
+    .ad-btn3:hover {
+        color: #000;
+        background: #24b878;
+        padding: 3px 8px;
+        border: 2px solid #24b878;
+        border-radius: 0px;
+    }
     .ad-title {
         display: flex;
         align-Items: center;
@@ -230,8 +265,8 @@
     }
     
     .ad-container .ad-content .ad-cards .ad-card {
-        width: 250px;
-        height: 150px;
+        width: 200px;
+        height: 100px;
         background: white;
         margin: 20px 10px;
         display: flex;

@@ -2,6 +2,7 @@ import "./CSS/adminDashboard.css";
 import {useState,useEffect} from 'react';
 import axiosConfig from '../axiosConfig';
 import LeftBar from "./Bar/LeftBar";
+import TopBar from "./Bar/TopBar";
 // import { Link } from "react-router-dom";
 
 const Coupon =()=>{
@@ -35,11 +36,13 @@ const Coupon =()=>{
     return (
         <div>
             <LeftBar />
+            <TopBar />
             <div class="ad-container">
                 <div class="ad-content">
                     <div class="ad-cards">
                         <div class="ad-card">
                             <div class="ad-box">
+                                <h1>{coupon.length}</h1>
                                 <h3>Running Coupon</h3>
                             </div>
                         </div>

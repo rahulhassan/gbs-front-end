@@ -1,5 +1,6 @@
 import "./CSS/adminDashboard.css";
 import LeftBar from './Bar/LeftBar';
+import TopBar from './Bar/TopBar';
 //import {Link} from 'react-router-dom';
 import {useState} from 'react';
 import axios from "axios";
@@ -29,6 +30,7 @@ const CreateCoupon =()=>{
     return (
         <div>
             <LeftBar />
+            <TopBar />
             <div class="ad-container">
                 <div class="ad-content">
                     <div class="ad-content-3">

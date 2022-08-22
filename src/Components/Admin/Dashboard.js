@@ -1,24 +1,38 @@
 import "./CSS/adminDashboard.css";
 import {useState, useEffect} from 'react';
-import axiosConfig from '../axiosConfig';
+import axios from "axios";
 import LeftBar from "./Bar/LeftBar";
 import TopBar from "./Bar/TopBar";
+import { CSVLink } from "react-csv";
 
 const Dashboard=()=>{
 
     const [order,setOrder] = useState([]);
-    // const [employee,setEmployee] = useState([]);
+    const [employee, setEmployee] = useState([]);
+    const [buyer,setBuyer] = useState([]);
+    const [seller,setSeller] = useState([]);
+    const [coupon,setCoupon] = useState([]);
+    let x=0;
     
     useEffect(()=>{
-        axiosConfig.get("/admin/adminDashboard")
+        axios.get("http://localhost:8000/api/admin/adminDashboard")
         .then((rsp)=>{
-            setOrder(rsp.data);
-            // setEmployee(rsp.data);
+            setOrder(rsp.data[0]);
+            setEmployee(rsp.data[1]);
+            setBuyer(rsp.data[2]);
+            setSeller(rsp.data[3]);
+            setCoupon(rsp.data[4]);
             console.log(rsp);
         },(err)=>{
 
         }) 
     },[]);
+
+
+    order.forEach(element => {
+        x += parseInt(element.total);        
+    });
+    
 
     return (
         <div>
@@ -29,37 +43,37 @@ const Dashboard=()=>{
                 <div class="ad-cards">
                     <div class="ad-card">
                         <div class="ad-box">
-                            <h1>5</h1>
+                            <h1>{employee.length}</h1>
                             <h3>EMPLOYEE</h3>
                         </div>
                     </div>
                     <div class="ad-card">
                         <div class="ad-box">
-                            <h1>30</h1>
+                            <h1>{buyer.length}</h1>
                             <h3>BUYER</h3>
                         </div>
                     </div>
                     <div class="ad-card">
                         <div class="ad-box">
-                            <h1>5</h1>
+                            <h1>{seller.length}</h1>
                             <h3>SELLER</h3>
                         </div>
                     </div>
                     <div class="ad-card">
                         <div class="ad-box">
-                            <h1>20</h1>
+                            <h1>{order.length}</h1>
                             <h3>ORDER</h3>
                         </div>
                     </div>
                     <div class="ad-card">
                         <div class="ad-box">
-                            <h1>2</h1>
+                            <h1>{coupon.length}</h1>
                             <h3>RUNNING OFFERS</h3>
                         </div>
                     </div>
                     <div class="ad-card">
                         <div class="ad-box">
-                            <h1>50000</h1>
+                            <h1>{x}</h1>
                             <h3>TOTAL EARN</h3>
                         </div>
                     </div>
@@ -68,8 +82,11 @@ const Dashboard=()=>{
                     <div class="ad-recent-payments">
                         <div class="ad-title">
                             <h2>Payment History</h2>
+                            <div class="ad-btn3"><CSVLink data={order} filename="PAYMENT HISTORY">EXPORT PAYMENT HISTORY</CSVLink></div>
+
                         </div>
-                        <table>
+                                                
+                            <table>
                             <tr>
                                 <th>PAYMENT ID</th>
                                 <th>BUYER ID</th>
@@ -105,14 +122,14 @@ const Dashboard=()=>{
                             </tr>
                             
                             
-                            {/* {
+                            {
                                 employee.map((empl)=>(
                                     <tr>
                                         <td>{empl.e_id}</td>
                                         <td>{empl.e_name}</td>
                                     </tr>
                                 ))
-                            } */}
+                            }
 
                         </table>
                     </div>

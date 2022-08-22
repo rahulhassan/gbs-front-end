@@ -22,6 +22,27 @@ import Checkout from './Buyer/Others/Checkout';
 import Orders from './Buyer/Others/Orders';
 import Wishlist from './Buyer/Others/WishList';
 
+//____________________________ADMIN___________________________________
+
+import ADashboard from './Admin/Dashboard';
+import Statement from './Admin/Statement';
+import AProfile from './Admin/Profile';
+
+import Coupon from './Admin/Coupon';
+import CreateCoupon from './Admin/CreateCoupon';
+
+import Buyer from './Admin/Buyer';
+import CreateBuyer from './Admin/CreateBuyer';
+import EditBuyer from './Admin/EditBuyer';
+
+import Seller from './Admin/Seller';
+import CreateSeller from './Admin/CreateSeller';
+import EditSeller from './Admin/EditSeller';
+
+import Employee from './Admin/Employee';
+import CreateEmployee from './Admin/CreateEmployee';
+import EditEmployee from './Admin/EditEmployee';
+
 const MainRoute=()=>{
     return (
         <div>
@@ -66,6 +87,32 @@ const MainRoute=()=>{
 
 
 {/* ----------------------------------------------------------------------------------------------------------- */}
+
+
+{/* -------------------------------------ADMIN------------------------------------------------*/}
+
+                    <Route path="/Admin/Dashboard" element={<ADashboard/>}></Route>
+                    <Route path="/Admin/Statement" element={<Statement/>}></Route>
+                    <Route path="/Admin/Profile" element={<AProfile/>}></Route>
+
+                    <Route path="/Admin/Coupon" element={<Coupon/>}></Route>
+                    <Route path="/Admin/CreateCoupon" element={<CreateCoupon/>}></Route>
+
+                    <Route path="/Admin/Buyer" element={<Buyer/>}></Route>
+                    <Route path="/Admin/CreateBuyer" element={<CreateBuyer/>}></Route>
+                    <Route path="/Admin/EditBuyer/:id" element={<EditBuyer/>}></Route>
+
+                    <Route path="/Admin/Seller" element={<Seller/>}></Route>
+                    <Route path="/Admin/CreateSeller" element={<CreateSeller/>}></Route>
+                    <Route path="/Admin/EditSeller/:id" element={<EditSeller/>}></Route>
+
+                    <Route path="/Admin/Employee" element={<Employee/>}></Route>
+                    <Route path="/Admin/CreateEmployee" element={<CreateEmployee/>}></Route>
+                    <Route path="/Admin/EditEmployee/:id" element={<EditEmployee/>}></Route>
+
+
+{/* ----------------------------------------------------------------------------------------------------------- */}
+
 
 
                 </Routes>
