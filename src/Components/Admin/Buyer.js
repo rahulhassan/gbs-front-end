@@ -1,18 +1,18 @@
 import "./CSS/adminDashboard.css";
-import {useState, useEffect, useRef} from 'react';
+import {useState, useEffect} from 'react';
 import axiosConfig from '../axiosConfig';
 import LeftBar from "./Bar/LeftBar";
 import TopBar from "./Bar/TopBar";
+import {CSVLink} from 'react-csv';
 // import { Link } from "react-router-dom";
 
 const Buyer =()=>{
     const [buyer,setBuyer] = useState([]);
-    const count = useRef(0);
+
     useEffect(()=>{
         axiosConfig.get("/admin/files/buyer")
         .then((rsp)=>{
             setBuyer(rsp.data);
-            count.current = count.current + 1;
             console.log(rsp);
         },(err)=>{
 
@@ -44,7 +44,7 @@ const Buyer =()=>{
                     <div class="ad-cards">
                         <div class="ad-card">
                             <div class="ad-box">
-                                <h1>{count.current}</h1>
+                                <h1>{buyer.length}</h1>
                                 <h3>Total Buyer</h3>
                             </div>
                         </div>
@@ -55,6 +55,8 @@ const Buyer =()=>{
                                 <h2>BUYER DETAILS</h2>
 
                                 {/* <Link to={"/Admin/CreateBuyer"}>ADD A BUYER</Link> */}
+
+                                <div class="ad-btn3"><CSVLink data={buyer} filename="BUYER LIST">EXPORT BUYER LIST</CSVLink></div>
 
                                 <div class="ad-btn"><a href={"/Admin/CreateBuyer"} class="btn">Add A BUYER</a></div>
                             </div>

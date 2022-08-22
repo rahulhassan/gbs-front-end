@@ -2,6 +2,8 @@ import "./CSS/adminDashboard.css";
 import {useState,useEffect} from 'react';
 import axiosConfig from '../axiosConfig';
 import LeftBar from "./Bar/LeftBar";
+import { CSVLink } from "react-csv";
+import TopBar from "./Bar/TopBar";
 // import { Link } from "react-router-dom";
 
 const Seller =()=>{
@@ -35,11 +37,13 @@ const Seller =()=>{
     return (
         <div>
             <LeftBar />
+            <TopBar />
             <div class="ad-container">
                 <div class="ad-content">
                     <div class="ad-cards">
                         <div class="ad-card">
                             <div class="ad-box">
+                                <h1>{seller.length}</h1>
                                 <h3>Total Seller</h3>
                             </div>
                         </div>
@@ -49,6 +53,7 @@ const Seller =()=>{
                             <div class="ad-title">
                                 <h2>SELLER DETAILS</h2>
 
+                                <div class="ad-btn3"><CSVLink data={seller} filename="SELLER LIST">EXPORT SELLER LIST</CSVLink></div>
 
                                 <div class="ad-btn"><a href={"/Admin/CreateSeller"} class="btn">Add A SELLER</a></div>
                             </div>

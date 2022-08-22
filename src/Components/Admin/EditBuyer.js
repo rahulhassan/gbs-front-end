@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import LeftBar from "./Bar/LeftBar";
+import TopBar from "./Bar/TopBar";
 
 
 const EditBuyer=(props)=> {
@@ -59,6 +60,7 @@ const EditBuyer=(props)=> {
 
         <div>
              <LeftBar />
+             <TopBar />
              <div class="ad-container">
                  <div class="ad-content">
                      <div class="ad-content-3">
