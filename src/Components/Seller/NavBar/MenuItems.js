@@ -1,7 +1,7 @@
-import {Link} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 const MenuItems =({url,title})=>{
     return (
-        <Link to={url} className="nav-item nav-link">{title}</Link>
+        <NavLink to={url} className="nav-item nav-link">{title}</NavLink>
     )   
 }
 export default MenuItems;
