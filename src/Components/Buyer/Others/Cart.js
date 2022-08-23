@@ -13,7 +13,7 @@ const Cart=()=>{
     const [sub_total,setSubTotal] = useState("");
 
     useEffect(()=>{
-        axiosConfig.get("/cart")
+        axiosConfig.get(`/cart/${localStorage.getItem("user_id")}`)
         .then((rsp)=>{
             setProducts(rsp.data.cart);
             setSubTotal(rsp.data.sub_total);
@@ -40,7 +40,7 @@ const Cart=()=>{
             })
                 .then((willDelete) => {
                 if (willDelete) {
-                    axiosConfig.delete(`/cart/destroy/${c_id}`)
+                    axiosConfig.delete(`/cart/destroy/${localStorage.getItem("user_id")}/${c_id}`)
                     .then((rsp)=>{
                         if(rsp.data.status === 200){
                             swal("Success", rsp.data.message, "success");
@@ -70,12 +70,11 @@ const Cart=()=>{
         const[err,setErr] = useState("");
         var cpn="";
         var dis="";
-
-        
+      
         const couponApply=(event)=>{
             event.preventDefault();
             var data={cpn_name:cpn_name}
-            axiosConfig.post("/coupon/apply",data)
+            axiosConfig.post(`/coupon/apply/${localStorage.getItem("user_id")}`,data)
             .then((rsp)=>{
 
                 if(rsp.data.cpn_name && rsp.data.discount )
@@ -105,6 +104,10 @@ const Cart=()=>{
                 setCoupon(cpn);
                 setDiscount(dis);
                 setMsg(rsp.data.msg);
+                // if(rsp.data.msg)
+                // {
+                //     swal("Success",rsp.data.msg,"success");
+                // }
                 // setCoupon(rsp.data.cpn_name);
                 // setDiscount(rsp.data.discount);
                 console.log(rsp);
@@ -145,7 +148,8 @@ const Cart=()=>{
 
         setProducts(cart=>
             cart.map((item)=>
-            cart_id === item.c_id? {...item,p_quantity:item.p_quantity - 1}: item
+                cart_id === item.c_id? {...item,p_quantity:item.p_quantity - 1}: item
+            // cart_id === item.c_id? {...item,p_quantity:item.p_quantity - (item.p_quantity>1? 1:0)}: item
                 )
             );
             updateCartQuantity(cart_id,"dec");
@@ -157,7 +161,8 @@ const Cart=()=>{
 
         setProducts(cart=>
             cart.map((item)=>
-            cart_id === item.c_id? {...item,p_quantity:item.p_quantity + 1 }: item
+                cart_id === item.c_id? {...item,p_quantity:item.p_quantity + 1 }: item
+            // cart_id === item.c_id? {...item,p_quantity:item.p_quantity + (item.p_quantity<10? 1:0) }: item
                 )
             );
             updateCartQuantity(cart_id,"inc");
@@ -166,9 +171,10 @@ const Cart=()=>{
 
     //_____________________________________________________________________________________________
 
+ 
     function updateCartQuantity(cart_id,scope)
     {
-        axiosConfig.put(`/updateCartQuantity/${cart_id}/${scope}`).then(rsp=>{
+        axiosConfig.put(`/updateCartQuantity/${localStorage.getItem("user_id")}/${cart_id}/${scope}`).then(rsp=>{
             if(rsp.data.status===200)
             {
                 // swal("Success",rsp.data.message,"success");

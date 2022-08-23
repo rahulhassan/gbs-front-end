@@ -12,7 +12,7 @@ const Orders=()=>{
     //const [product,setProduct] = useState({});
 
     useEffect(()=>{
-        axiosConfig.get("/my_orders")
+        axiosConfig.get(`/my_orders/${localStorage.getItem("user_id")}`)
         .then((rsp)=>{
             setOrders(rsp.data);
             console.log(rsp);
@@ -38,14 +38,14 @@ const Orders=()=>{
         thisClicked.innerText = "Deleting";
         swal({
                 title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this product!",
+                text: "Once deleted, you will not be able to recover this order!",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
             })
                 .then((willDelete) => {
                 if (willDelete) {
-                    axiosConfig.delete(`/my_orders/delete/${id}`)
+                    axiosConfig.delete(`/my_orders/delete/${localStorage.getItem("user_id")}/${id}`)
                     .then((rsp)=>{
                         if(rsp.data.status === 200){
                             swal("Success", rsp.data.message, "success");

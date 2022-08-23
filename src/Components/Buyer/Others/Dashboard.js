@@ -32,7 +32,7 @@ const Dashboard=()=>{
     const showCoupon=(event)=>
         {
             event.preventDefault();
-            axiosConfig.get("/showCoupon")
+            axiosConfig.get(`/showCoupon/${localStorage.getItem("user_id")}`)
             .then((rsp)=>{
              
                 if(rsp.data.coupon)
@@ -97,7 +97,7 @@ const Dashboard=()=>{
 
             <TopMenu/>
 
-            <marquee behavior="alternate" direction="right"><b>|--- Welcome ---|</b></marquee>
+            <marquee behavior="alternate" direction="right" className="text-success"><b>|--- Welcome {localStorage.getItem('user_name')} ---|</b></marquee>
             <hr/>
             <h4 style={{textAlign:"center",fontFamily: "myFirstFont"}}>Choose Your Product </h4>
             <hr/> 
@@ -181,6 +181,7 @@ const Dashboard=()=>{
                                         {
                                             return val;
                                         }
+                                     
                                 })
 
 

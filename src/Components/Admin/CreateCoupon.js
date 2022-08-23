@@ -1,5 +1,6 @@
 import "./CSS/adminDashboard.css";
 import LeftBar from './Bar/LeftBar';
+import TopBar from './Bar/TopBar';
 //import {Link} from 'react-router-dom';
 import {useState} from 'react';
 import axios from "axios";
@@ -29,9 +30,10 @@ const CreateCoupon =()=>{
     return (
         <div>
             <LeftBar />
-            <div class="container">
-                <div class="content">
-                    <div class="content-3">
+            <TopBar />
+            <div class="ad-container">
+                <div class="ad-content">
+                    <div class="ad-content-3">
                         <h1>CREATE A NEW COUPON</h1>
                              
                         <form action="" method="POST" onSubmit={handleForm}>
@@ -43,6 +45,7 @@ const CreateCoupon =()=>{
                           <input type="text" name="discount" id="discount" value={discount} onChange={(e)=>{setDis(e.target.value)}} /><br/>
                         
                           <button>ADD</button>
+                          <div class="ad-btn2"><a href="/Admin/Coupon">CANCEL</a></div>
                         </form>
                 
                             

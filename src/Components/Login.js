@@ -6,6 +6,7 @@ const Login =()=>{
     const[email,setEmail]=useState("");
     const[pass,setPass]=useState("");
     const[msg,setMsg]=useState("");
+    const[err,setErr] = useState("");
 
     const Submit=(event)=>{
         event.preventDefault();
@@ -16,7 +17,14 @@ const Login =()=>{
         var data={email:email, pass:pass};
         axiosConfig.post("/login",data)
         .then((rsp)=>{
+            setErr("");
+            if (rsp.data.status === 422) {
+                setErr(rsp.data.errors)
+                login.innerHTML= "Sign in";
+            }
+
             setMsg(rsp.data.msg);
+            
             localStorage.setItem('_authToken',rsp.data.token);
             
             if (rsp.data.user === "seller") {
@@ -33,7 +41,7 @@ const Login =()=>{
                 .then((rsp)=>{
                     localStorage.setItem("user_id", rsp.data[0].buyer.b_id);
                     localStorage.setItem("user_name", rsp.data[0].buyer.b_name);
-                    //navigate('/seller/dashboard');
+                    navigate('/dashboard');
                 })
             }else if(rsp.data.user === "employee"){
                 axiosConfig.get(`/seller/info/${localStorage.getItem("_authToken")}`)
@@ -47,12 +55,12 @@ const Login =()=>{
                 .then((rsp)=>{
                     localStorage.setItem("user_id", rsp.data[0].admin.a_id);
                     localStorage.setItem("user_name", rsp.data[0].admin.a_name);
-                    //navigate('/seller/dashboard');
+                    navigate('/Admin/Dashboard');
                 })
             }
 
             login.className = "btn btn-primary btn-block mb-4";
-            login.innerHTML= "Sign Up";
+            login.innerHTML= "Sign in";
         });
 
     }
@@ -70,11 +78,13 @@ const Login =()=>{
             <p className="text-danger">{msg}</p>
             
             <div className="form-outline mb-4">
+                <span className="text-danger">{err.email? err.email[0]:''}</span>
                 <input type="text" className="form-control" name="email" onChange={(e)=>setEmail(e.target.value)} value={email}/>
                 <label className="form-label">Email address</label>
             </div>
         
             <div className="form-outline mb-4">
+                <span className="text-danger">{err.pass? err.pass[0]:''}</span>
                 <input type="password" className="form-control" name="pass" onChange={(e)=>setPass(e.target.value)} value={pass} ></input>
                 <label className="form-label">Password</label>
             </div>

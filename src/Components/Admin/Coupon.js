@@ -1,13 +1,14 @@
 import "./CSS/adminDashboard.css";
 import {useState,useEffect} from 'react';
-import axios from 'axios';
+import axiosConfig from '../axiosConfig';
 import LeftBar from "./Bar/LeftBar";
+import TopBar from "./Bar/TopBar";
 // import { Link } from "react-router-dom";
 
 const Coupon =()=>{
     const [coupon,setCoupon] = useState([]);
     useEffect(()=>{
-        axios.get("http://localhost:8000/api/admin/files/coupon")
+        axiosConfig.get("/admin/files/coupon")
         .then((rsp)=>{
             setCoupon(rsp.data);
             console.log(rsp);
@@ -21,7 +22,7 @@ const Coupon =()=>{
         const thisClicked = e.currentTarget;
         thisClicked.innerText = "Deleting";
 
-        axios.get(`http://localhost:8000/api/admin/files/deleteCoupon/${id}`)
+        axiosConfig.get(`/admin/files/deleteCoupon/${id}`)
         .then((rsp)=>{
             thisClicked.closest("tr").remove();
             
@@ -35,23 +36,25 @@ const Coupon =()=>{
     return (
         <div>
             <LeftBar />
-            <div class="container">
-                <div class="content">
-                    <div class="cards">
-                        <div class="card">
-                            <div class="box">
+            <TopBar />
+            <div class="ad-container">
+                <div class="ad-content">
+                    <div class="ad-cards">
+                        <div class="ad-card">
+                            <div class="ad-box">
+                                <h1>{coupon.length}</h1>
                                 <h3>Running Coupon</h3>
                             </div>
                         </div>
                     </div>
-                    <div class="content-2">
-                        <div class="recent-payments">
-                            <div class="title">
+                    <div class="ad-content-2">
+                        <div class="ad-recent-payments">
+                            <div class="ad-title">
                                 <h2>COUPON DETAILS</h2>
 
                                 {/* <Link to={"/Admin/CreateBuyer"}>ADD A BUYER</Link> */}
 
-                                <a href={"/Admin/CreateCoupon"} class="btn">Add A COUPON</a>
+                                <div class="ad-btn"><a href={"/Admin/CreateCoupon"} class="btn">Add A COUPON</a></div>
                             </div>
                             <table>
                                 <tr>

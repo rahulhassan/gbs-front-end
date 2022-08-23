@@ -1,13 +1,15 @@
 import "./CSS/adminDashboard.css";
 import {useState,useEffect} from 'react';
-import axios from 'axios';
+import axiosConfig from '../axiosConfig';
 import LeftBar from "./Bar/LeftBar";
+import { CSVLink } from "react-csv";
+import TopBar from "./Bar/TopBar";
 // import { Link } from "react-router-dom";
 
 const Seller =()=>{
     const [seller,setSeller] = useState([]);
     useEffect(()=>{
-        axios.get("http://localhost:8000/api/admin/files/seller")
+        axiosConfig.get("/admin/files/seller")
         .then((rsp)=>{
             setSeller(rsp.data);
             console.log(rsp);
@@ -21,7 +23,7 @@ const Seller =()=>{
         const thisClicked = e.currentTarget;
         thisClicked.innerText = "Deleting";
 
-        axios.get(`http://localhost:8000/api/admin/files/deleteSeller/${id}`)
+        axiosConfig.get(`/admin/files/deleteSeller/${id}`)
         .then((rsp)=>{
             thisClicked.closest("tr").remove();
             
@@ -35,22 +37,25 @@ const Seller =()=>{
     return (
         <div>
             <LeftBar />
-            <div class="container">
-                <div class="content">
-                    <div class="cards">
-                        <div class="card">
-                            <div class="box">
+            <TopBar />
+            <div class="ad-container">
+                <div class="ad-content">
+                    <div class="ad-cards">
+                        <div class="ad-card">
+                            <div class="ad-box">
+                                <h1>{seller.length}</h1>
                                 <h3>Total Seller</h3>
                             </div>
                         </div>
                     </div>
-                    <div class="content-2">
-                        <div class="recent-payments">
-                            <div class="title">
+                    <div class="ad-content-2">
+                        <div class="ad-recent-payments">
+                            <div class="ad-title">
                                 <h2>SELLER DETAILS</h2>
 
+                                <div class="ad-btn3"><CSVLink data={seller} filename="SELLER LIST">EXPORT SELLER LIST</CSVLink></div>
 
-                                <a href={"/Admin/CreateSeller"} class="btn">Add A SELLER</a>
+                                <div class="ad-btn"><a href={"/Admin/CreateSeller"} class="btn">Add A SELLER</a></div>
                             </div>
                             <table>
                                 <tr>
@@ -69,7 +74,7 @@ const Seller =()=>{
                                             <td>{sellall.s_phn}</td>
                                             <td>{sellall.s_mail}</td>
                                             <td>{sellall.s_add}</td>
-                                            <td><a href={`/Admin/EditSeller/${sellall.s_id}`}>Edit</a></td>
+                                            <td><div class="ad-btn"><a href={`/Admin/EditSeller/${sellall.s_id}`}>Edit</a></div></td>
                                             <td><button onClick={ (e) => DeleteSeller(e, sellall.s_id) }>Delete</button></td>
                                         </tr>
                                     ))

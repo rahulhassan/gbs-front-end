@@ -1,7 +1,8 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from 'axios';
 import LeftBar from "./Bar/LeftBar";
+import TopBar from "./Bar/TopBar";
 
 
 const EditBuyer=(props)=> {
@@ -59,26 +60,29 @@ const EditBuyer=(props)=> {
 
         <div>
              <LeftBar />
-             <div class="container">
-                 <div class="content">
-                     <div class="content-3">
+             <TopBar />
+             <div class="ad-container">
+                 <div class="ad-content">
+                     <div class="ad-content-3">
                          <h1>UPDATE BUYER</h1>  
 
-                           <h1>{msg}</h1>                         
-                           <label>BUYER ID</label><br/>
-                           <input readOnly name="b_id" id="id" value={inputs.b_id || '' } onChange={handleChange} /><br/>
-                           <label>BUYER NAME</label><br/>
-                           <input type="text" name="b_name" id="name" value={inputs.b_name || '' } onChange={handleChange} /><span>{err.b_name? err.b_name[0]:''}</span><br/>                        
-                           <label>PHONE NUMBER</label><br/>
-                           <input type="text" name="b_phn" id="phn" value={inputs.b_phn || '' } onChange={handleChange} /><span>{err.b_phn? err.b_phn[0]:''}</span><br/>                        
-                           <label>EMAIL</label><br/>
-                           <input type="text" name="b_mail" id="email" value={inputs.b_mail || '' } onChange={handleChange} /><span>{err.b_mail? err.b_mail[0]:''}</span><br/>                        
-                           <label>PASSWORD</label><br/>
-                           <input type="text" name="b_pass" id="pass" value={inputs.b_pass || '' } onChange={handleChange} /><span>{err.b_pass? err.b_pass[0]:''}</span><br/>                        
-                           <label>ADDRESS</label><br/>
-                           <input type="text" name="b_add" id="add" value={inputs.b_add || '' } onChange={handleChange} /><span>{err.b_add? err.b_add[0]:''}</span><br/>                        
-                           <button type="button" onClick={submitForm}>UPDATE</button>  
-                           <a href="/Admin/Buyer">CANCEL</a>                                      
+                           <h1>{msg}</h1>   
+                           <form>                      
+                                <label>BUYER ID</label><br/>
+                                <input readOnly name="b_id" id="id" value={inputs.b_id || '' } onChange={handleChange} /><br/>
+                                <label>BUYER NAME</label><br/>
+                                <input type="text" name="b_name" id="name" value={inputs.b_name || '' } onChange={handleChange} /><span>{err.b_name? err.b_name[0]:''}</span><br/>                        
+                                <label>PHONE NUMBER</label><br/>
+                                <input type="text" name="b_phn" id="phn" value={inputs.b_phn || '' } onChange={handleChange} /><span>{err.b_phn? err.b_phn[0]:''}</span><br/>                        
+                                <label>EMAIL</label><br/>
+                                <input type="text" name="b_mail" id="email" value={inputs.b_mail || '' } onChange={handleChange} /><span>{err.b_mail? err.b_mail[0]:''}</span><br/>                        
+                                <label>PASSWORD</label><br/>
+                                <input type="text" name="b_pass" id="pass" value={inputs.b_pass || '' } onChange={handleChange} /><span>{err.b_pass? err.b_pass[0]:''}</span><br/>                        
+                                <label>ADDRESS</label><br/>
+                                <input type="text" name="b_add" id="add" value={inputs.b_add || '' } onChange={handleChange} /><span>{err.b_add? err.b_add[0]:''}</span><br/>                        
+                                <button type="button" onClick={submitForm}>UPDATE</button>  
+                                <div class="ad-btn2"><a href="/Admin/Buyer">CANCEL</a></div> 
+                            </form>                                     
                      </div>
                  </div>
              </div>

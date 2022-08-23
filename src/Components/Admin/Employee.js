@@ -1,13 +1,15 @@
 import "./CSS/adminDashboard.css";
 import {useState,useEffect} from 'react';
-import axios from 'axios';
+import axiosConfig from '../axiosConfig';
 import LeftBar from "./Bar/LeftBar";
+import TopBar from "./Bar/TopBar";
+import { CSVLink } from "react-csv";
 // import { Link } from "react-router-dom";
 
 const Employee =()=>{
     const [employee,setEmployee] = useState([]);
     useEffect(()=>{
-        axios.get("http://localhost:8000/api/admin/files/employee")
+        axiosConfig.get("/admin/files/employee")
         .then((rsp)=>{
             setEmployee(rsp.data);
             console.log(rsp);
@@ -21,7 +23,7 @@ const Employee =()=>{
         const thisClicked = e.currentTarget;
         thisClicked.innerText = "Deleting";
 
-        axios.get(`http://localhost:8000/api/admin/files/delete/${id}`)
+        axiosConfig.get(`/admin/files/delete/${id}`)
         .then((rsp)=>{
             thisClicked.closest("tr").remove();
             
@@ -35,21 +37,27 @@ const Employee =()=>{
     return (
         <div>
             <LeftBar />
-            <div class="container">
-                <div class="content">
-                    <div class="cards">
-                        <div class="card">
-                            <div class="box">
+            <TopBar />
+            <div class="ad-container">
+                <div class="ad-content">
+                    <div class="ad-cards">
+                        <div class="ad-card">
+                            <div class="ad-box">
+                                <h1>{employee.length}</h1>
                                 <h3>Total Employee</h3>
                             </div>
                         </div>
                     </div>
-                    <div class="content-2">
-                        <div class="recent-payments">
-                            <div class="title">
+                    <div class="ad-content-2">
+                        <div class="ad-recent-payments">
+                            <div class="ad-title">
                                 <h2>EMPLOYEE DETAILS</h2>
 
-                                <a href={"/Admin/CreateEmployee"} class="btn">Add A Employee</a>
+                                <div class="ad-btn3"><CSVLink data={employee} filename="EMPLOYEE LIST">EXPORT EMPLOYEE LIST</CSVLink></div>
+
+
+                                
+                                <div class="ad-btn"><a href={"/Admin/CreateEmployee"} class="btn">Add A Employee</a></div>
                             </div>
                             <table>
                                 <tr>
@@ -68,7 +76,7 @@ const Employee =()=>{
                                             <td>{empall.e_phn}</td>
                                             <td>{empall.e_mail}</td>
                                             <td>{empall.e_add}</td>
-                                            <td><a href={`/Admin/EditEmployee/${empall.e_id}`}>Edit</a></td>
+                                            <td><div class="ad-btn"><a href={`/Admin/EditEmployee/${empall.e_id}`}>Edit</a></div></td>
                                             <td><button onClick={ (e) => deleteEmployee(e, empall.e_id) }>Delete</button></td>
                                         </tr>
                                     ))
