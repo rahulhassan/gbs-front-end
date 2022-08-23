@@ -1,8 +1,6 @@
-<<<<<<< HEAD
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-=======
 import {BrowserRouter,Route,Routes,Navigate} from 'react-router-dom';
->>>>>>> master
+
 import Login from './Login';
 import Logout from './Logout';
 import EditProduct from './Seller/EditProduct';
@@ -64,7 +62,7 @@ const MainRoute = () => {
         <div>
             <BrowserRouter>
                 <Routes>
-<<<<<<< HEAD
+
 
                     <Route path="/signup" element={<SignupUser />}></Route>
                     <Route path="/signin" element={<Login />}></Route>
@@ -79,7 +77,6 @@ const MainRoute = () => {
                     <Route path="/seller/statement" element={<SellerStatement/>}></Route> */}
                     <Route path="/product/edit/:id" element={<EditProduct />}> </Route>
                     <Route path="/seller/edit/:id" element={<EditSellerProfile />}> </Route>
-=======
                     
                     <Route path="/signup" element={<SignupUser/>}></Route>
                     <Route path="/signin" element={<Login/>}></Route>
@@ -97,7 +94,7 @@ const MainRoute = () => {
                     <Route path="/seller/statement" element={<SellerStatement/>}></Route>
                     <Route path="/product/edit/:id" element={<EditProduct/>}> </Route>
                     <Route path="/seller/edit/:id" element={<EditSellerProfile/>}> </Route>
->>>>>>> master
+
 
 
 {/* -------------------------------------------------------------------------------------*/}
