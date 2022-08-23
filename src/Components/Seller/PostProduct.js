@@ -51,15 +51,14 @@ const PostProduct=()=> {
 
     return (
         <div><NavBar></NavBar>
+        <hr/>
+            <h4 style={{textAlign:"center", fontFamily: "myFirstFont"}}>Post Product</h4>
+        <hr/>
         <section className="vh-200">
-        <div className="container py-5 h-200">
-            <div className="row d-flex justify-content-center align-items-center h-200">
-            <div className="col col-lg-10 mb-4 mb-lg-0">
-            <h3>Post Product</h3>
-            
-            <form onSubmit={handleForm}>
-            <div className="row">
-                <div  className="col-sm-6">
+        <div className="container py-3 h-200">
+            <div className="d-flex justify-content-center align-items-center h-200">
+            <div className="col col-lg-6 mb-4 mb-lg-0">            
+                <form onSubmit={handleForm}>
                 
                     <div className="card p-4">
                         
@@ -118,10 +117,9 @@ const PostProduct=()=> {
                         <button type="submit" onClick={handleClick} className="btn btn-info mt-2">{buttonText}</button>
                         
                     </div>
-                </div>
+               
+                </form>
             </div>
-            </form>
-        </div>
         </div>
         </div>
        

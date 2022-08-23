@@ -6,6 +6,8 @@ import NavBar from './NavBar/NavBar';
 const ProductsList=()=>{
     const [loading, setLoading] =useState(true);
     const [products ,setProducts] = useState([]);
+    const [search,setSearch] = useState("");
+    const[Category,setCategory] = useState("");
 
     useEffect(()=>{
         
@@ -61,12 +63,43 @@ const ProductsList=()=>{
    
     return(
         <div>
-        <NavBar/>
+        <NavBar/><br/>
+
+        <input className="form-control" name="search" style={{width:"630px", height:"40px", borderColor:"green", margin:"auto"}} onChange={(e)=>{setSearch(e.target.value)}}  type="search"  placeholder="Write product title..."></input>
+        <br/>
+        <center>
+            <button type="button" style={{borderRadius: "40px", margin:"5px"}} className="btn btn-outline-secondary" onClick={(e)=>{setCategory("")}}>ALL</button>
+            <button type="button" style={{borderRadius: "40px", margin:"5px"}} className="btn btn-outline-secondary" onClick={(e)=>{setCategory("TV")}}>TV</button>
+            <button type="button" style={{borderRadius: "40px", margin:"5px"}} className="btn btn-outline-secondary" onClick={(e)=>{setCategory("Computer")}}>Computer</button>
+            <button type="button" style={{borderRadius: "40px", margin:"5px"}} className="btn btn-outline-secondary" onClick={(e)=>{setCategory("Mobile")}}>Mobile & Tablet</button>
+            <button type="button" style={{borderRadius: "40px", margin:"5px"}} className="btn btn-outline-secondary" onClick={(e)=>{setCategory("Camera")}}>Camera</button>
+            <button type="button" style={{borderRadius: "40px", margin:"5px"}} className="btn btn-outline-secondary" onClick={(e)=>{setCategory("Fridge")}}>Fridge</button>
+            <button type="button" style={{borderRadius: "40px", margin:"5px"}} className="btn btn-outline-secondary" onClick={(e)=>{setCategory("Accessories")}}>Accessories</button> 
+        
         <div className="container py-5 h-150">
             <div className="w-75 row d-flex justify-content-center align-items-center">
                 {
-                    products.map((p)=>(
-                        <div key={p.p_id} className="row">
+                    products.filter((p)=>{
+                                        
+                    if(search==="" && Category==="")
+                    {
+                        return p;
+
+                    }else if(Category=== "" && p.p_title.toLowerCase().includes(search.toLowerCase()))
+                    {
+                        return p;
+
+                    }else if(search==="" && p.Category.toLowerCase().includes(Category.toLowerCase()))
+                    {
+                        return p;
+
+                    }else if(p.p_title.toLowerCase().includes(search.toLowerCase()) && p.Category.toLowerCase().includes(Category.toLowerCase()))
+                    {
+                        return p;
+                    }
+                    
+                    }).map((p)=>(
+                        <div key={p.p_id} >
                             <div className="col-sm-10">
                                 <div className="card p-4">  
                                     <table className="table table-striped">
@@ -104,6 +137,7 @@ const ProductsList=()=>{
                 }
             </div>
         </div>
+        </center>
         </div>
     )
 }

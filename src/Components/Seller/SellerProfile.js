@@ -32,7 +32,7 @@ const SellerProfile=()=>{
                     <div className="card mb-3" style={{borderRadius: ".5rem"}}>
                     <div className="row g-0">
                         <div className="col-md-4 text-center text-white" style={{borderTopLeftRadius: ".5rem", borderBottomLeftRadius: ".5rem", backgroundColor:"rgba(253, 160, 133, 1)"}}>
-                        <img src={`http://127.0.0.1:8000/images/seller/${profile.s_image}`} alt="Avatar" className="img-fluid my-5" style={{width: "200px", borderRadius: "50%"}} />
+                        { profile.s_image==null ? <img src="http://127.0.0.1:8000/dummy/profile.png" alt="Avatar" className="img-fluid my-5" style={{width: "200px", borderRadius: "50%"}} /> : <img src={`http://127.0.0.1:8000/images/seller/${profile.s_image}`} alt="Avatar" className="img-fluid my-5" style={{width: "200px", borderRadius: "50%"}} />}
                         <h5>{profile.s_name}</h5>
                         <p style={{marginBottom:"80px"}}>Best Seller</p>
                         </div>

@@ -14,7 +14,7 @@ const NavBar=()=>{
                 </div>
                 <Link to="/signout" style={{marginLeft:"600px"}}><button type="button" className="btn btn-outline-primary">Sign Out</button></Link>
                 <h5 className="nav-item" style={{marginLeft: "20px"}}>Welcome, {localStorage.getItem("user_name")}</h5>
-                <Link to="/seller/profile"><img src= {`http://127.0.0.1:8000/images/seller/${localStorage.getItem("user_img")}`} alt="Avatar" style={{marginLeft:"20px", width:"45px", height:"45px", borderRadius:"50%"}}></img></Link> 
+                <Link to="/seller/profile">{localStorage.getItem("user_img") === "null" ? <img src="http://127.0.0.1:8000/dummy/profile.png" style={{marginLeft:"20px", width:"45px", height:"45px", borderRadius:"50%"}} alt=""></img>:<img src= {`http://127.0.0.1:8000/images/seller/${localStorage.getItem("user_img")}`} alt="Avatar" style={{marginLeft:"20px", width:"45px", height:"45px", borderRadius:"50%"}}></img>}</Link> 
             </div>
         </nav>
     )
