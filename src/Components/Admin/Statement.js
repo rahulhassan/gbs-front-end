@@ -45,7 +45,7 @@ const Statement=()=>{
             <LeftBar />
             <TopBar />
             <div className="ad-piechart">
-                <h3>PIE CHART</h3>
+                <h3>USERS</h3>
                 <PieChart width={1030} height={350}>
                 <Pie data={ab} cx="50%" cy="50%" outerRadius={80} label>
                   {
