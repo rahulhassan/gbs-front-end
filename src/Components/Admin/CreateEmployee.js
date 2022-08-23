@@ -58,19 +58,19 @@ const CreateEmployee =()=>{
                             <h1>{msg}</h1>
                           
                           <label>EMPLOYEE NAME</label><br />
-                          <input type="text" name="e_name" id="name" value={e_name} onChange={(e)=>{setName(e.target.value)}}/><span>{err.e_name? err.e_name[0]:''}</span><br/>
+                          <input type="text" name="e_name" id="name" value={e_name} onChange={(e)=>{setName(e.target.value)}}/><span class="ad-err">{err.e_name? err.e_name[0]:''}</span><br/>
                           
                           <label>PHONE NUMBER</label><br/>
-                          <input type="text" name="e_phn" id="phn" value={e_phn} onChange={(e)=>{setPhn(e.target.value)}} /><span>{err.e_phn? err.e_phn[0]:''}</span><br/>
+                          <input type="text" name="e_phn" id="phn" value={e_phn} onChange={(e)=>{setPhn(e.target.value)}} /><span class="ad-err">{err.e_phn? err.e_phn[0]:''}</span><br/>
                           
                           <label>EMAIL</label><br/>
-                          <input type="text" name="e_mail" id="email" value={e_mail} onChange={(e)=>{setMail(e.target.value)}} /><span>{err.e_mail? err.e_mail[0]:''}</span><br/>
+                          <input type="text" name="e_mail" id="email" value={e_mail} onChange={(e)=>{setMail(e.target.value)}} /><span class="ad-err">{err.e_mail? err.e_mail[0]:''}</span><br/>
                           
                           <label>PASSWORD</label><br/>
-                          <input type="password" name="e_pass" id="pass" value={e_pass} onChange={(e)=>{setPass(e.target.value)}}/><span>{err.e_pass? err.e_pass[0]:''}</span><br/>
+                          <input type="password" name="e_pass" id="pass" value={e_pass} onChange={(e)=>{setPass(e.target.value)}}/><span class="ad-err">{err.e_pass? err.e_pass[0]:''}</span><br/>
                           
                           <label>ADDRESS</label><br/>
-                          <input type="text" name="e_add" id="add" value={e_add} onChange={(e)=>{setAdd(e.target.value)}} /><span>{err.e_add? err.e_add[0]:''}</span><br/>
+                          <input type="text" name="e_add" id="add" value={e_add} onChange={(e)=>{setAdd(e.target.value)}} /><span class="ad-err">{err.e_add? err.e_add[0]:''}</span><br/>
                           
                           <button>ADD</button>
                           <div class="ad-btn2"><a href="/Admin/Employee">CANCEL</a></div>

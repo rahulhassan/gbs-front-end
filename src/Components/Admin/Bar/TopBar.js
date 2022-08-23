@@ -25,6 +25,7 @@ const TopBar=()=>{
                         <div class="ad-user">
                           <div class="ad-img-case">
                             {<img src={`http://localhost:8000/images/${admin.a_image}`} width="30px" height="30px" alt=""></img> }
+                            <h6>{admin.a_name}</h6>
                           </div>
                           <div class="ad-btn"><a href="/logout">LOG OUT</a></div>
       

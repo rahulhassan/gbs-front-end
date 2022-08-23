@@ -24,9 +24,17 @@
     h3 {
         color: #999;
     }
+    h6{
+        margin-left: 80px;
+        font-weight: 700;
+        color: salmon;
+    }
+    .ad-err{
+        color: red;
+    }
     
     .ad-btn {
-        background: #24b878;
+        background: #49c6b8;
         color: #fff;
         padding: 5px 10px;
         border-radius: 10px;
@@ -63,7 +71,7 @@
     }
 
     .ad-btn2 {
-        background: #24b878;
+        background: #49c6b8;
         color: #fff;
         padding: 5px 10px;
         border-radius: 10px;
@@ -96,9 +104,9 @@
     
     .ad-btn3:hover {
         color: #000;
-        background: #24b878;
+        background: #49c6b8;
         padding: 3px 8px;
-        border: 2px solid #24b878;
+        border: 2px solid #49c6b8;
         border-radius: 0px;
     }
     .ad-title {
@@ -128,9 +136,9 @@
     }
     table button:hover {
         color: #000;
-        background: #24b878;
+        background: #49c6b8;
         padding: 3px 8px;
-        border: 2px solid #24b878;
+        border: 2px solid #49c6b8;
         border-radius: 0px;
     }
     

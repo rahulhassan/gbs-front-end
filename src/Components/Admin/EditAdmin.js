@@ -47,11 +47,11 @@ const EditAdmin=()=> {
                 <div class="ad-min">
                                         
                     <label>OLD PASSWORD</label><br/>
-                    <input type="text" name="o_pass" id="pass" value={inputs.o_pass || '' } onChange={handleChange} /><span>{err.o_pass? err.o_pass[0]:''}</span><br/>
+                    <input type="text" name="o_pass" id="pass" value={inputs.o_pass || '' } onChange={handleChange} /><span class="ad-err">{err.o_pass? err.o_pass[0]:''}</span><br/>
                     <label>NEW PASSWORD</label><br/>
-                    <input type="password" name="a_pass" id="pass" value={inputs.a_pass || '' } onChange={handleChange} /><span>{err.a_pass? err.a_pass[0]:''}</span><br/>                        
+                    <input type="password" name="a_pass" id="pass" value={inputs.a_pass || '' } onChange={handleChange} /><span class="ad-err">{err.a_pass? err.a_pass[0]:''}</span><br/>                        
                     <label>RE-TYPE PASSWORD</label><br/>
-                    <input type="password" name="r_pass" id="pass" value={inputs.r_pass || '' } onChange={handleChange} /><span>{err.r_pass? err.r_pass[0]:''}</span><br/>                        
+                    <input type="password" name="r_pass" id="pass" value={inputs.r_pass || '' } onChange={handleChange} /><span class="ad-err">{err.r_pass? err.r_pass[0]:''}</span><br/>                        
                     <button type="button" onClick={submitForm}>UPDATE</button>          
 
                  </div>                            
