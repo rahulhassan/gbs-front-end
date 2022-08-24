@@ -3,6 +3,7 @@ import axiosConfig from '../axiosConfig';
 import NavBar from './NavBar/NavBar';
 import swal from 'sweetalert';
 const SellerOrder=()=>{
+    document.title = "Orders";
     const [loading, setLoading] =useState(true);
     const [order, setOrder] = useState([]);
 
@@ -47,7 +48,7 @@ const SellerOrder=()=>{
         return (
             <div>
                 <NavBar/>
-                <h4>Loading...</h4>
+                <h4 style={{textAlign:"center", marginTop:"150px"}}>Please Wait...</h4>
             </div>
         )
     }

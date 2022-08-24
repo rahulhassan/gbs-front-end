@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-=======
-import {BrowserRouter,Route,Routes,Navigate} from 'react-router-dom';
->>>>>>> master
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+
 import Login from './Login';
 import Logout from './Logout';
 import EditProduct from './Seller/EditProduct';
@@ -55,6 +52,7 @@ import Buyerlist from './Employee/BuyerList';
 import EditBuyerList from './Employee/editbuyerlist';
 import Sellerlist from './Employee/SellerList';
 import EditSellerList from './Employee/editsellerlist';
+import Category from './Seller/Category';
 
 
 
@@ -64,52 +62,43 @@ const MainRoute = () => {
         <div>
             <BrowserRouter>
                 <Routes>
-<<<<<<< HEAD
 
                     <Route path="/signup" element={<SignupUser />}></Route>
                     <Route path="/signin" element={<Login />}></Route>
                     <Route path="/signout" element={<Logout />}></Route>
-
-                    {/* -----------------------------------seller-Route---------------------------------- */}
-
-                    <Route path="/seller/dashboard" element={<ProductsList />}></Route>
-                    <Route path="/seller/post" element={<PostProduct />}></Route>
-                    <Route path="/seller/profile" element={<SellerProfile />}></Route>
-                    {/*<Route path="/seller/orders" element={<SellerOrder/>}></Route>
-                    <Route path="/seller/statement" element={<SellerStatement/>}></Route> */}
-                    <Route path="/product/edit/:id" element={<EditProduct />}> </Route>
-                    <Route path="/seller/edit/:id" element={<EditSellerProfile />}> </Route>
-=======
-                    
-                    <Route path="/signup" element={<SignupUser/>}></Route>
-                    <Route path="/signin" element={<Login/>}></Route>
-                    <Route path="/signout" element={<Logout/>}></Route>
                     <Route path="/login" element={<Login/>}></Route>
                     <Route path="/logout" element={<Logout/>}></Route>
                     <Route path="/" element={<Navigate replace to="/logout" />}></Route>
-                    
+
 {/* -----------------------------------seller-Route---------------------------------- */}
 
                     <Route path="/seller/dashboard" element={<ProductsList/>}></Route>
+
                     <Route path="/seller/post" element={<PostProduct/>}></Route>
+
                     <Route path="/seller/profile" element={<SellerProfile/>}></Route>
+
                     <Route path="/seller/orders" element={<SellerOrder/>}></Route>
+
                     <Route path="/seller/statement" element={<SellerStatement/>}></Route>
+
                     <Route path="/product/edit/:id" element={<EditProduct/>}> </Route>
+
                     <Route path="/seller/edit/:id" element={<EditSellerProfile/>}> </Route>
->>>>>>> master
+
+                    <Route path="/category" element={<Category/>}> </Route>
+
 
 
 {/* -------------------------------------------------------------------------------------*/}
 
 
 
-                    {/* -------------------------------------Buyer-Route------------------------------------------------*/}
+{/*----------------------------------Buyer-Route---------------------------------------------*/}
 
                     <Route path="/dashboard" element={<Dashboard></Dashboard>}></Route>
                     <Route path="/productDetails/:title" element={<ProductDetails></ProductDetails>}> </Route>
                     <Route path="/orderDetails/:title" element={<OrderDetails></OrderDetails>}> </Route>
-                    {/* <Route path="/placeOrder/:title" element={<OrderDetails></OrderDetails>}> </Route> */}
                     <Route path="/orderCompleted" element={<OrderCompleted></OrderCompleted>}> </Route>
                     <Route path="/profile" element={<Profile></Profile>}> </Route>
                     <Route path="/updateProfile" element={<UpdateProfile></UpdateProfile>}> </Route>
@@ -119,7 +108,7 @@ const MainRoute = () => {
                     <Route path="/wishlist" element={<Wishlist></Wishlist>}> </Route>
 
 
-                    {/* -------------------------------------Employee-Route------------------------------------------------*/}
+{/* ---------------------------------Employee-Route-------------------------------------------*/}
                     <Route path="/EmployeeProfile" element={<EmployeeProfile/>}> </Route>
                     <Route path="/EditEmployeeProfile/:id" element={<EditEmployeeProfile/>}> </Route>
                     <Route path="/Buyerlist" element={<Buyerlist />}> </Route>
@@ -153,7 +142,7 @@ const MainRoute = () => {
                     <Route path="/Admin/EditEmployee/:id" element={<EditEmployee/>}></Route>
 
 
-{/* ----------------------------------------------------------------------------------------------------------- */}
+{/* --------------------------------------------------------------------------------- */}
 
 
 

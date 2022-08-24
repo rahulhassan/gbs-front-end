@@ -7,7 +7,7 @@ const Login =()=>{
     const[pass,setPass]=useState("");
     const[msg,setMsg]=useState("");
     const[err,setErr] = useState("");
-
+    document.title = "Login";
     const Submit=(event)=>{
         event.preventDefault();
         const login = document.getElementById("signin");
@@ -48,7 +48,7 @@ const Login =()=>{
                 .then((rsp)=>{
                     localStorage.setItem("user_id", rsp.data[0].employee.e_id);
                     localStorage.setItem("user_name", rsp.data[0].employee.e_name);
-                    //navigate('/seller/dashboard');
+                    navigate('/EmployeeProfile');
                 })
             }else if(rsp.data.user === "admin"){
                 axiosConfig.get(`/seller/info/${localStorage.getItem("_authToken")}`)

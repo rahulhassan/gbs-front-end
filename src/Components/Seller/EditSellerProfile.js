@@ -5,6 +5,7 @@ import swal from 'sweetalert';
 import NavBar from "./NavBar/NavBar";
 
 const EditSellerProfile=()=>{
+    document.title = "Edit Profile";
     const navigate = useNavigate();
     const [inputs,setInputs] = useState({});
     const {id} = useParams();
@@ -79,7 +80,7 @@ const EditSellerProfile=()=>{
         return (
             <div>
                 <NavBar/>
-                <h4>Loading...</h4>
+                <h4 style={{textAlign:"center", marginTop:"150px"}}>Please Wait...</h4>
             </div>
         )
     }

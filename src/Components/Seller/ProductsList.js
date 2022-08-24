@@ -1,24 +1,31 @@
 import {useState,useEffect} from 'react';
 import axiosConfig from '../axiosConfig';
 import swal from 'sweetalert';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import NavBar from './NavBar/NavBar';
 const ProductsList=()=>{
+    document.title = "Dashboard";
     const [loading, setLoading] =useState(true);
     const [products ,setProducts] = useState([]);
     const [search,setSearch] = useState("");
     const[Category,setCategory] = useState("");
+    
+    const[categoryItem,setCategoryItem] = useState([]);
 
     useEffect(()=>{
         
         axiosConfig.get(`/seller/products/${localStorage.getItem("user_id")}`)
         .then((rsp)=>{
             setProducts(rsp.data);
-            setLoading(false);
         },(err)=>{
 
-        }) 
+        });
+        axiosConfig.get("/products/category").then((res)=>{
+            setCategoryItem(res.data);
+            setLoading(false);
+        }); 
     },[]);
+ 
     const DeleteProduct = (e, id)=>{
         e.preventDefault();
         const thisClicked = e.currentTarget;
@@ -56,7 +63,7 @@ const ProductsList=()=>{
         return (
             <div>
                 <NavBar/>
-                <h4>Post loading...</h4>
+                <h4 style={{textAlign:"center", marginTop:"150px"}}>Post loading...</h4>
             </div>
         )
     }
@@ -69,12 +76,18 @@ const ProductsList=()=>{
         <br/>
         <center>
             <button type="button" style={{borderRadius: "40px", margin:"5px"}} className="btn btn-outline-secondary" onClick={(e)=>{setCategory("")}}>ALL</button>
+            {
+                categoryItem.map((ct)=>(
+                    <input key={ct.id} type="button" style={{borderRadius: "40px", margin:"5px"}} className="btn btn-outline-secondary" onClick={(e)=>{setCategory(ct.category_name)}} value={ct.category_name}/>
+                ))
+            }
+            {/* <button type="button" style={{borderRadius: "40px", margin:"5px"}} className="btn btn-outline-secondary" onClick={(e)=>{setCategory("")}}>ALL</button>
             <button type="button" style={{borderRadius: "40px", margin:"5px"}} className="btn btn-outline-secondary" onClick={(e)=>{setCategory("TV")}}>TV</button>
             <button type="button" style={{borderRadius: "40px", margin:"5px"}} className="btn btn-outline-secondary" onClick={(e)=>{setCategory("Computer")}}>Computer</button>
             <button type="button" style={{borderRadius: "40px", margin:"5px"}} className="btn btn-outline-secondary" onClick={(e)=>{setCategory("Mobile")}}>Mobile & Tablet</button>
             <button type="button" style={{borderRadius: "40px", margin:"5px"}} className="btn btn-outline-secondary" onClick={(e)=>{setCategory("Camera")}}>Camera</button>
             <button type="button" style={{borderRadius: "40px", margin:"5px"}} className="btn btn-outline-secondary" onClick={(e)=>{setCategory("Fridge")}}>Fridge</button>
-            <button type="button" style={{borderRadius: "40px", margin:"5px"}} className="btn btn-outline-secondary" onClick={(e)=>{setCategory("Accessories")}}>Accessories</button> 
+            <button type="button" style={{borderRadius: "40px", margin:"5px"}} className="btn btn-outline-secondary" onClick={(e)=>{setCategory("Accessories")}}>Accessories</button>  */}
         
         <div className="container py-5 h-150">
             <div className="w-75 row d-flex justify-content-center align-items-center">

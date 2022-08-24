@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axiosConfig from '../axiosConfig';
 import NavBar from './NavBar/NavBar';
 const SellerProfile=()=>{
+    document.title = "Profile";
     const [loading, setLoading] =useState(true);
     const [profile ,setProfile] = useState({});
     useEffect(()=>{
@@ -16,7 +17,7 @@ const SellerProfile=()=>{
         return (
             <div>
                 <NavBar/>
-                <h4>Loading...</h4>
+                <h4 style={{textAlign:"center", marginTop:"150px"}}>Loading...</h4>
             </div>
         )
     }

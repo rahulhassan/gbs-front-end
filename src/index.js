@@ -4,13 +4,12 @@ import MainRoute from './Components/MainRoute';
 import './index.css';
 //import App from './App';
 import reportWebVitals from './reportWebVitals';
-import MainRoute from './Components/MainRoute';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(https://github.com/rahulhassan/gbs-front-end/blob/master/src/index.js
+root.render(
   <React.StrictMode>
 
-     <MainRoute /> 
+     <MainRoute></MainRoute>
 
   </React.StrictMode>
 );
