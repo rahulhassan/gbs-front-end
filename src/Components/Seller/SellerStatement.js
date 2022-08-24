@@ -8,7 +8,7 @@ const SellerStatement=()=>{
     const [loading, setLoading] = useState(true);
 
     useEffect(()=>{
-        axiosConfig.get(`/seller/statement`).then((res)=>{
+        axiosConfig.get(`/seller/statement/${localStorage.getItem("user_id")}`).then((res)=>{
             setStatement(res.data);
             console.log(res.data);
             setLoading(false);

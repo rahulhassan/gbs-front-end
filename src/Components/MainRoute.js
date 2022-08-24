@@ -1,4 +1,9 @@
+
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {BrowserRouter,Route,Routes,Navigate} from 'react-router-dom';
+
 
 import Login from './Login';
 import Logout from './Logout';
@@ -87,6 +92,7 @@ const MainRoute = () => {
                     <Route path="/logout" element={<Logout />}></Route>
                     <Route path="/" element={<Navigate replace to="/logout" />}></Route>
 
+
                     {/* -----------------------------------seller-Route---------------------------------- */}
 
                     <Route path="/seller/dashboard" element={<ProductsList />}></Route>
@@ -96,6 +102,15 @@ const MainRoute = () => {
                     <Route path="/seller/statement" element={<SellerStatement />}></Route>
                     <Route path="/product/edit/:id" element={<EditProduct />}> </Route>
                     <Route path="/seller/edit/:id" element={<EditSellerProfile />}> </Route>
+
+                    <Route path="/seller/dashboard" element={<ProductsList/>}></Route>
+                    <Route path="/seller/post" element={<PostProduct/>}></Route>
+                    <Route path="/seller/profile" element={<SellerProfile/>}></Route>
+                    <Route path="/seller/orders" element={<SellerOrder/>}></Route>
+                    <Route path="/seller/statement" element={<SellerStatement/>}></Route>
+                    <Route path="/product/edit/:id" element={<EditProduct/>}> </Route>
+                    <Route path="/seller/edit/:id" element={<EditSellerProfile/>}> </Route>
+
 
 
 

@@ -1,30 +1,4 @@
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    
-    body {
-    }
-    
-    a {
-        text-decoration: none;
-    }
-    
-    li {
-        list-style: none;
-    }
-    
-    h1,
-    h2 {
-        margin-top: 10px;
-        color: #444;
-    }
-    
-    h3 {
-        color: #999;
-    }
-    h6{
+    .ad-header-name {
         margin-left: 80px;
         font-weight: 700;
         color: salmon;
@@ -46,13 +20,13 @@
         margin-bottom: 10px;
     }
     .ad-piechart p {
-        margin-left: 200px;
+        margin-left: 400px;
         font-size: 20px;
         font-weight: 500;
         color: #f05462;
     }
     .ad-piechart h3 {
-        margin-left: 200px;
+        margin-left: 400px;
         color: #f05462;
         font-weight: 700;
 
@@ -150,6 +124,9 @@
         display: flex;
         flex-direction: column;
     }
+    .ad-side-menu li {
+        list-style: none;
+    }
     
     .ad-side-menu .ad-brand-name {
         height: 10vh;
@@ -159,6 +136,7 @@
     }
     
     .ad-side-menu ul li span a {
+        list-style: none;
         text-decoration: none;
         font-size: 24px;
         padding: 10px 40px;
@@ -168,6 +146,7 @@
     }
     
     .ad-side-menu ul li span a:hover {
+        list-style: none;
         background: white;
         color: #f05462;
     }
@@ -274,7 +253,7 @@
     
     .ad-container .ad-content .ad-cards .ad-card {
         width: 200px;
-        height: 100px;
+        height: 120px;
         background: white;
         margin: 20px 10px;
         display: flex;
