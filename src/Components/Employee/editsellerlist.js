@@ -4,7 +4,7 @@ import axiosConfig from '../axiosConfig';
 import swal from 'sweetalert';
 import NavBar from "./NavBar/NavBar";
 
-const EditSellerList=()=>{
+const SellerList=()=>{
     const navigate = useNavigate();
     const [inputs,setInputs] = useState({});
     const {id} = useParams();
@@ -16,20 +16,17 @@ const EditSellerList=()=>{
     useEffect(()=>{
         axiosConfig.get(`/employee/editseller/${id}`).then((res)=>{
             setInputs({
-                b_id:res.data.b_id,
-                name:res.data.b_name,
-                email:res.data.b_mail,
-                phone:res.data.b_phn,
-                address:res.data.b_add,
+                id:res.data.s_id,
+                name:res.data.s_name,
+                email:res.data.s_mail,
+                phone:res.data.s_phn,
+                address:res.data.s_add,
                 
             });
             
         });
     },[id]);
 
-    // const handleImage=(file)=>{
-    //     setImage(file[0]);
-    // }
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -40,24 +37,19 @@ const EditSellerList=()=>{
         const thisClicked = e.currentTarget;
         thisClicked.innerText = "Updating";
 
-        const fData = new FormData();
-        fData.append("b_id", inputs.b_id);
-        fData.append("name", inputs.name);
-        fData.append("email", inputs.email);
-        fData.append("phone", inputs.phone);
-        fData.append("address", inputs.address);
+    
 
         swal("Do you want to update?", {
-            buttons: ["No", "Yes"],
+            buttons: ["Yes", "No"],
         })
         .then((willUpdate) => {
             if (willUpdate) {
-                axiosConfig.post("/employee/editseller",fData)
+                axiosConfig.post("/employee/editseller",inputs)
                 .then((rsp)=>{
                     console.log(rsp.data)
                     if (rsp.data.status === 200) {
-                        navigate('/employee/editseller');
-                        swal('Success', rsp.data.msg, 'success')
+                        navigate('/SellerList');
+                        swal('Updated', rsp.data.msg, 'Updated')
                     } else if (rsp.data.status === 422) {
                         setErr(rsp.data.errors)
                         thisClicked.innerText = "Update";
@@ -65,21 +57,12 @@ const EditSellerList=()=>{
                 })
                 
             } else {
-                swal("Profile is not Updated");
+                
                 thisClicked.innerText = "Update";
                 
             }
         });
     }
-
-    // if(loading){
-    //     return (
-    //         <div>
-    //             <NavBar/>
-    //             <h4>Loading...</h4>
-    //         </div>
-    //     )
-    // }
 
 
 
@@ -108,7 +91,7 @@ const EditSellerList=()=>{
                     <input type="text" name="address" value={inputs.address ||'' }  className="form-control" placeholder="Enter your present address" onChange={handleChange}/>
                     <p className="text-danger">{err.address? err.address[0]:''}</p>
                 
-                    <button type="submit" className="btn btn-primary" onClick={submitForm}>Update</button>
+                    <button type="submit" className="p-3 mb-2 bg-success text-white" onClick={submitForm}>Update</button>
                 
                     </div>
                     </div>
@@ -118,4 +101,4 @@ const EditSellerList=()=>{
         </div>
     )
 }
-export default EditSellerList;
+export default SellerList;

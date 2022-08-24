@@ -1,7 +1,6 @@
 import "./CSS/adminDashboard.css";
 import {useState, useEffect} from 'react';
 import axios from "axios";
-import LeftBar from "./Bar/LeftBar";
 import TopBar from "./Bar/TopBar";
 import {Pie, PieChart, Cell} from 'recharts';
 
@@ -42,7 +41,7 @@ const Statement=()=>{
 
     return (
         <div>
-            <LeftBar />
+            <div class="ad-btn2"><a href="/Admin/Dashboard">GO BACK!</a></div>                             
             <TopBar />
             <div className="ad-piechart">
                 <h3>USERS</h3>
