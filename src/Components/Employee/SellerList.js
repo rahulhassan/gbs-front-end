@@ -2,17 +2,32 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axiosConfig from '../axiosConfig';
 import NavBar from './NavBar/NavBar';
-const Buyerlist = () => {
+const Sellerlist = () => {
     
-    const [profile, setProfile] = useState([]);
+    const [seller, setSeller] = useState([]);
     useEffect(() => {
         axiosConfig.get('/employee/sellerlist').then((res) => {
-            setProfile(res.data);
+            setSeller(res.data);
             console.log(res.data);
             
         });
     }, []);
 
+    const deleteBuyer = (e, id)=>{
+        e.preventDefault();
+        const thisClicked = e.currentTarget;
+        thisClicked.innerText = "Deleting";
+
+        axiosConfig.get(`/employee/deleteseller/${id}`)
+        .then((rsp)=>{
+            thisClicked.closest("tr").remove();
+            
+        },(err)=>{
+            debugger;
+        });
+            
+        
+    }
 
 
 
@@ -20,7 +35,7 @@ const Buyerlist = () => {
         <div>
             <NavBar />
             <div className="container">
-               <h3>Employee Profile</h3>
+               <h3>Seller Profile</h3>
                 <table className="table">
 
                    
@@ -35,7 +50,7 @@ const Buyerlist = () => {
                     </thead>
                      <tbody>   
                         { 
-                            profile.map((emp)=> (
+                            seller.map((emp)=> (
                         <tr key={emp.s_id}>
                             <td>{emp.s_name}</td>
                             <td>{emp.s_phn}</td>
@@ -44,6 +59,8 @@ const Buyerlist = () => {
                             <td>
 
                             <Link to={`/EditSellerList/${emp.s_id}`} className = "btn btn-warning">Edit</Link>
+                            <td><button href='employee/sellerlist' onClick={ (e) => deleteBuyer(e, emp.b_id) }>Delete</button></td>
+                            {/* <td> <a className='btn btn-warning' href={`employee/addseller`}>Add A Buyer</a> </td> */}
 
 
                             </td>
@@ -57,4 +74,4 @@ const Buyerlist = () => {
         </div>
     )
 }
-export default Buyerlist;
+export default Sellerlist;

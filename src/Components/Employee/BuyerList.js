@@ -13,6 +13,22 @@ const Buyerlist = () => {
         });
     }, []);
 
+    const deleteBuyer = (e, id)=>{
+        e.preventDefault();
+        const thisClicked = e.currentTarget;
+        thisClicked.innerText = "Deleting";
+
+        axiosConfig.get(`/employee/deletebuyer/${id}`)
+        .then((rsp)=>{
+            thisClicked.closest("tr").remove();
+            
+        },(err)=>{
+            debugger;
+        });
+            
+        
+    }
+
 
 
 
@@ -20,7 +36,7 @@ const Buyerlist = () => {
         <div>
             <NavBar />
             <div className="container">
-               <h3>Employee Profile</h3>
+               <h3>Buyer's Profile</h3>
                 <table className="table">
 
                    
@@ -44,6 +60,8 @@ const Buyerlist = () => {
                             <td>
 
                             <Link to={`/EditBuyerList/${emp.b_id}`} className = "btn btn-warning">Edit</Link>
+                            <td><button href='employee/buyerlist' onClick={ (e) => deleteBuyer(e, emp.b_id) }>Delete</button></td>
+                            {/* <td> <a className='btn btn-warning' href={`/employee/addebuyer`}>Add A Employee</a> </td> */}
 
 
                             </td>

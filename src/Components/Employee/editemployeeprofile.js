@@ -9,12 +9,12 @@ const EditEmployeeProfile = () => {
     const [inputs, setInputs] = useState({});
     const { id } = useParams();
     const [err, setErr] = useState("");
-    const [loading, setLoading] = useState(true);
+
 
 
 
     useEffect(() => {
-        axiosConfig.get(`/employee/edit/$(id)`).then((res) => {
+        axiosConfig.get(`/employee/edit/${id}`).then((res) => {
             setInputs({
                 id: res.data.e_id,
                 name: res.data.e_name,
@@ -23,13 +23,11 @@ const EditEmployeeProfile = () => {
                 address: res.data.e_add,
 
             });
-            setLoading(false);
+          
         });
     }, [id]);
 
-    // const handleImage=(file)=>{
-    //     setImage(file[0]);
-    // }
+   
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -40,27 +38,20 @@ const EditEmployeeProfile = () => {
         const thisClicked = e.currentTarget;
         thisClicked.innerText = "Updating";
 
-        const fData = new FormData();
-        fData.append("id", inputs.id);
-        fData.append("name", inputs.name);
-        fData.append("email", inputs.email);
-        fData.append("phone", inputs.phone);
-        fData.append("address", inputs.address);
-
         swal("Do you want to update?", {
-            buttons: ["No", "Yes"],
+            buttons: ["Yes", "No"],
         })
             .then((willUpdate) => {
                 if (willUpdate) {
-                    axiosConfig.post("/employee/edit", fData)
+                    axiosConfig.post("/employee/edit", inputs)
                         .then((rsp) => {
                             console.log(rsp.data)
-                            if (rsp.data.status == 200)
+                            if (rsp.data.status === 200)
                             {
                                 navigate('/EmployeeProfile');
                                 swal('Success', rsp.data.msg, 'success')
                             } 
-                            else if (rsp.data.status == 422) 
+                            else if (rsp.data.status === 422) 
                             {
                                 setErr(rsp.data.errors)
                                 thisClicked.innerText = "Update";
@@ -68,20 +59,11 @@ const EditEmployeeProfile = () => {
                         })
 
                 } else {
-                    swal("Profile is not Updated");
+                   
                     thisClicked.innerText = "Update";
 
                 }
             });
-    }
-
-    if (loading) {
-        return (
-            <div>
-                <NavBar />
-                <h4>Loading...</h4>
-            </div>
-        )
     }
 
 
@@ -89,7 +71,7 @@ const EditEmployeeProfile = () => {
     return (
         <div><NavBar />
             <div className="container py-5 h-150">
-                <div className="row d-flex justify-content-center align-items-center h-150">
+                <div className="row d-flex justify-content-center align-items-center h-350">
                     <div className="row">
                         <h3>Update Employee Profile</h3>
                         <div className="col-sm-6">
@@ -113,7 +95,7 @@ const EditEmployeeProfile = () => {
                                 <input type="text" name="address" value={inputs.address || ''} className="form-control" placeholder="Enter your present address" onChange={handleChange} />
                                 <p className="text-danger">{err.address ? err.address[0] : ''}</p>
 
-                                <button type="submit" className="btn btn-primary" onClick={submitForm}>Update</button>
+                                <button type="submit" className="p-3 mb-2 bg-success text-white" onClick={submitForm}>Update</button>
 
                             </div>
                         </div>
