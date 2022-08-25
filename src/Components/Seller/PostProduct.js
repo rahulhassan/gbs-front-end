@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axiosConfig from '../axiosConfig';
 import swal from 'sweetalert';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NavBar from "./NavBar/NavBar";
 
 
 const PostProduct=()=> {
+    document.title = "Post Product";
     const navigate = useNavigate();
+    const[categoryItem,setCategoryItem] = useState([]);
+    const[loading,setLoading] = useState(true);
     const[p_title,setP_title] = useState("");
     const[p_brand,setP_brand] = useState("");
     const[p_price,setP_price] = useState("");
@@ -24,6 +27,13 @@ const PostProduct=()=> {
     }
 
     const s_id = localStorage.getItem("user_id");
+
+    useEffect(()=>{
+        axiosConfig.get("/products/category").then((res)=>{
+            setCategoryItem(res.data);
+            setLoading(false);
+        });
+    },[]);
     
     const handleForm=(event)=>{
         event.preventDefault();
@@ -47,6 +57,14 @@ const PostProduct=()=> {
                 setButtonText(initialText);
             }
         })
+    }
+    if(loading){
+        return (
+            <div>
+                <NavBar/>
+                <h4 style={{textAlign:"center", marginTop:"150px"}}>Loading...</h4>
+            </div>
+        )
     }
 
     return (
@@ -85,14 +103,14 @@ const PostProduct=()=> {
                         
                         <label>Category</label>
                         <select className="form-control mb-2" value={Category} onChange={(e)=>{setCategory(e.target.value)}}>
-                            <option value="TV" >TV</option>
-                            <option value="Computer">Computer</option>
-                            <option value="Mobile">Mobile</option>
-                            <option value="Camera">Camera</option>
-                            <option value="Fridge">Fridge</option>
-                            <option value="Accessories">Accessories</option>
+                            {
+                                categoryItem.map((ct)=>(
+                                    <option key={ct.id} value={ct.category_name}>{ct.category_name}</option>
+                                ))
+                            }
                         </select>
-                        <p className="text-danger"></p>
+                        <Link to="/category" style={{width:"160px"}} className="btn btn-info mb-4">Add Category</Link> 
+                        
 
                         <label>Description</label>
                         <textarea type="text" name="p_description" className="form-control mb-2"
@@ -102,7 +120,7 @@ const PostProduct=()=> {
                         <p className="text-danger">{err.p_description? err.p_description[0]:''}</p>
 
                         <label>Quantity</label>
-                        <input type="text" name="p_quantity" className="form-control mb-2"
+                        <input type="number" name="p_quantity" className="form-control mb-2"
                             value={p_quantity}
                             onChange={(e)=>{setP_quantity(e.target.value)}}
                         />
@@ -114,7 +132,7 @@ const PostProduct=()=> {
                         />
                         <p className="text-danger">{err.image? err.image[0]:''}</p>
 
-                        <button type="submit" onClick={handleClick} className="btn btn-info mt-2">{buttonText}</button>
+                        <input type="submit" onClick={handleClick} className="btn btn-success mt-2" value={buttonText}/>
                         
                     </div>
                

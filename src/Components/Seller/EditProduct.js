@@ -6,6 +6,8 @@ import NavBar from "./NavBar/NavBar";
 
 
 const EditProduct=(props)=> {
+    document.title = "Edit Product";
+    const[categoryItem,setCategoryItem] = useState([]);
     const navigate = useNavigate();
     const [inputs,setInputs] = useState({});
     const {id} = useParams();
@@ -27,9 +29,13 @@ const EditProduct=(props)=> {
                 p_quantity:res.data.p_quantity,
                 
             });
+        });
+        axiosConfig.get("/products/category").then((res)=>{
+            setCategoryItem(res.data);
             setLoading(false);
         });
     },[id]);
+    
 
     // const handleImage=(file)=>{
     //     setImage(file[0]);
@@ -81,18 +87,19 @@ const EditProduct=(props)=> {
         return (
             <div>
                 <NavBar/>
-                <h4>Loading...</h4>
+                <h4 style={{textAlign:"center", marginTop:"150px"}}>Please Wait...</h4>
             </div>
         )
     }
 
     return (
         <div><NavBar/>
+        <hr/>
+            <h4 style={{textAlign:"center", fontFamily: "myFirstFont"}}>Update Product Information</h4>
+        <hr/>
         <section className="vh-150">
-            <div className="container py-5 h-150">
+            <div className="container py-2 h-150">
                 <div className="row d-flex justify-content-center align-items-center h-150">
-                    <div className="row">
-                        <h3>Update Product Information</h3>
                         <div className="col-sm-6">
                             <div className="card p-4">
                                 <img src={`http://127.0.0.1:8000/images/${inputs.image}`} width="300px" alt=''></img>
@@ -117,12 +124,11 @@ const EditProduct=(props)=> {
 
                                 <label>Category</label>
                                 <select className="form-control mb-2" name="Category" value={inputs.Category || '' } onChange={handleChange}>
-                                    <option value="TV">TV</option>
-                                    <option value="Computer">Computer</option>
-                                    <option value="Mobile">Mobile</option>
-                                    <option value="Camera">Camera</option>
-                                    <option value="Fridge">Fridge</option>
-                                    <option value="Accessories">Accessories</option>
+                                    {
+                                        categoryItem.map((ct)=>(
+                                            <option key={ct.id} value={ct.category_name}>{ct.category_name}</option>
+                                        ))
+                                    }
                                 </select>
 
                                 <label>Description</label>
@@ -130,14 +136,13 @@ const EditProduct=(props)=> {
                                 <p className="text-danger">{err.p_description? err.p_description[0]:''}</p>
 
                                 <label>Quantity</label>
-                                <input type="text" name="p_quantity" className="form-control mb-2" defaultValue={inputs.p_quantity || '' } onChange={handleChange} />
+                                <input type="number" name="p_quantity" className="form-control mb-2" defaultValue={inputs.p_quantity || '' } onChange={handleChange} />
                                 <p className="text-danger">{err.p_quantity? err.p_quantity[0]:''}</p>
 
                                 <button type="button" onClick={submitForm} className="btn btn-info mt-2">Update</button>
 
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </section>

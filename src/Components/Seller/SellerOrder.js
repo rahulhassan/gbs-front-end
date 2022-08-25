@@ -3,6 +3,7 @@ import axiosConfig from '../axiosConfig';
 import NavBar from './NavBar/NavBar';
 import swal from 'sweetalert';
 const SellerOrder=()=>{
+    document.title = "Orders";
     const [loading, setLoading] =useState(true);
     const [order, setOrder] = useState([]);
 
@@ -47,7 +48,7 @@ const SellerOrder=()=>{
         return (
             <div>
                 <NavBar/>
-                <h4>Loading...</h4>
+                <h4 style={{textAlign:"center", marginTop:"150px"}}>Please Wait...</h4>
             </div>
         )
     }
@@ -62,7 +63,7 @@ const SellerOrder=()=>{
         OrderTable =
         <table className="table table-striped">
             <thead>
-                <tr>
+                <tr className="table-dark">
                 <th scope="col">Product Title</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Amount</th>
@@ -97,9 +98,11 @@ const SellerOrder=()=>{
             <hr/>
             <h4 style={{textAlign:"center", fontFamily: "myFirstFont"}}>Seller Order</h4>
             <hr/>
+            <center>
             <div className="w-75 p-3 justify-content-center">
                 {OrderTable}
             </div>
+            </center>
         
         </div>
     )

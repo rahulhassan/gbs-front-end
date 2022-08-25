@@ -5,6 +5,7 @@ import swal from 'sweetalert';
 import NavBar from "./NavBar/NavBar";
 
 const EditSellerProfile=()=>{
+    document.title = "Edit Profile";
     const navigate = useNavigate();
     const [inputs,setInputs] = useState({});
     const {id} = useParams();
@@ -79,7 +80,7 @@ const EditSellerProfile=()=>{
         return (
             <div>
                 <NavBar/>
-                <h4>Loading...</h4>
+                <h4 style={{textAlign:"center", marginTop:"150px"}}>Please Wait...</h4>
             </div>
         )
     }
@@ -88,16 +89,17 @@ const EditSellerProfile=()=>{
 
     return(
         <div><NavBar/>
-            <div className="container py-5 h-150">
+            <hr/>
+            <h4 style={{textAlign:"center", fontFamily: "myFirstFont"}}>Update Profile</h4>
+            <hr/>
+            <div className="container py-2 h-150">
                 <div className="row d-flex justify-content-center align-items-center h-150">
-                    <div className="row">
-                    <h3>Update Profile</h3>
                     <div className="col-sm-6">
                     <div className="card p-4">
                 
                     <label>Seller Photo</label>
                     <img src={`http://127.0.0.1:8000/images/seller/${inputs.image}`}  width="300px" alt=""/><br/>
-                    <input type="file" name="image" className="form-control-file" onChange = {(e)=>{setImage(e.target.files[0])}}/>
+                    <input type="file" name="image" className="form-control mb-2" onChange = {(e)=>{setImage(e.target.files[0])}}/>
                     <p className="text-danger">{err.image? err.image[0]:''}</p>
                
         
@@ -123,7 +125,6 @@ const EditSellerProfile=()=>{
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     )
 }

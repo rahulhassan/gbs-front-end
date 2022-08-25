@@ -44,7 +44,7 @@ const CreateCoupon =()=>{
                           <label>DISCOUNT</label><br/>
                           <input type="text" name="discount" id="discount" value={discount} onChange={(e)=>{setDis(e.target.value)}} /><br/>
                         
-                          <button>ADD</button>
+                          <button type="submit">ADD</button>
                           <div class="ad-btn2"><a href="/Admin/Coupon">CANCEL</a></div>
                         </form>
                 

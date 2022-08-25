@@ -4,6 +4,7 @@ import {useState,useEffect} from 'react';
 import axiosConfig from '../axiosConfig';
 
 const SellerStatement=()=>{
+    document.title = "Statement";
     const [statement, setStatement] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -61,7 +62,7 @@ const SellerStatement=()=>{
             return (
                 <div>
                     <NavBar/>
-                    <h4>Loading...</h4>
+                    <h4 style={{textAlign:"center", marginTop:"150px"}}>Loading...</h4>
                 </div>
             )
         }

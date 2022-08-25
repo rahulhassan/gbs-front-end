@@ -59,7 +59,7 @@ const Sellerlist = () => {
                             <td>
 
                             <Link to={`/EditSellerList/${emp.s_id}`} className = "btn btn-warning">Edit</Link>
-                            <td><button href='employee/sellerlist' onClick={ (e) => deleteBuyer(e, emp.b_id) }>Delete</button></td>
+                            <td><button className = "btn btn-danger" href='employee/sellerlist' onClick={ (e) => deleteBuyer(e, emp.b_id) }>Delete</button></td>
                             {/* <td> <a className='btn btn-warning' href={`employee/addseller`}>Add A Buyer</a> </td> */}
 
 

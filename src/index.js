@@ -5,30 +5,11 @@ import './index.css';
 //import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-
-import Routes from './Components/Admin/Bar/Routes';
-// import MainRoute from './Components/MainRoute';
-
-
-
-
-import MainRoute from './Components/MainRoute';
-
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(https://github.com/rahulhassan/gbs-front-end/blob/master/src/index.js
+root.render(
   <React.StrictMode>
 
-     <MainRoute /> 
-
-    
-    
-
-    <Routes></Routes>
-
-    {/* <MainRoute></MainRoute> */}
-
-
+     <MainRoute></MainRoute>
 
   </React.StrictMode>
 );

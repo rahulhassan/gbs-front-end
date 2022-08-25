@@ -9,6 +9,7 @@ const NavBar=()=>{
                     <MenuItems url="/EmployeeProfile" title="Employee Profile"/>
                     <MenuItems url="/Buyerlist" title="Buyer List"/>
                     <MenuItems url="/Sellerlist" title="Seller List"/>
+                    <MenuItems url="/addemployee" title="Add Employee"/>
 
                 </div>
                 <Link to="/signout" style={{marginLeft:"600px"}}><button type="button" className="btn btn-outline-primary">Sign Out</button></Link>

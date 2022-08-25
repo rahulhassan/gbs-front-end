@@ -1,15 +1,49 @@
 import { Link } from "react-router-dom";
 import MenuItems from "./MenuItems";
+import {useState,useEffect} from 'react';
+import axiosConfig from "../../axiosConfig";
 
 const NavBar=()=>{
+    const [count, setCount] = useState("");
+
+    useEffect(()=>{
+        
+        axiosConfig.get(`/seller/orderscount/${localStorage.getItem("user_id")}`)
+        .then((rsp)=>{
+            setCount(rsp.data);
+        },(err)=>{
+    
+        }) 
+    },[]);
+    var option ="";
+    const myCss= {
+        position: "absolute",
+        top: "1px",
+        right: "-4px",
+        padding: "1px 5px",
+        borderRadius:" 50%",
+        background: "red",
+        color: "white",
+        fontSize:"10px"
+    }
+
+    if(count!=0){
+        option=
+        <span style={myCss}>{count}</span>
+    }
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="collapse navbar-collapse">
                 <div className="navbar-nav">
                     <MenuItems url="/seller/dashboard" title="Dashboard"/>
                     <MenuItems url="/seller/profile" title="Profile"/>
+                    
                     <MenuItems url="/seller/post" title="Post Product"/>
-                    <MenuItems url="/seller/orders" title="Orders"/>
+                    <div style={{position: "relative"}}>
+                    <MenuItems url="/seller/orders" title="Orders" />
+                    {option}
+                    </div>
                     <MenuItems url="/seller/statement" title="Statement"/>
                 </div>
                 <Link to="/signout" style={{marginLeft:"600px"}}><button type="button" className="btn btn-outline-primary">Sign Out</button></Link>

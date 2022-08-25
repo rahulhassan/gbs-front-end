@@ -57,8 +57,8 @@ const Employee = () => {
                             <td>{emp.e_add}</td>
                             <td>
 
-                            <Link to={`/EditEmployeeProfile/${emp.e_id}`} className = "btn btn-warning">Edit</Link>
-                            <button onClick={ (e) => deleteEmployee(e, emp.e_id) }>Delete</button>
+                            <Link to={`/EditEmployeeProfile/${emp.e_id}`} className = "btn btn-warning">Edit</Link> 
+                            <button className = "btn btn-danger" onClick={ (e) => deleteEmployee(e, emp.e_id) }>Delete</button>
                             {/* <Link to={`/addemployee/${emp.e_id}`} className = "btn btn-warning">Add Employee</Link> */}
                         
 
